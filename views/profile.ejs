@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel = "stylesheet" href = "/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <h4>MySQL Showcase</h4>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul> 
+    </nav>
+
+    <div class="container mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+    
+                        <div class="card-body">
+                            <div class="card-title mb-4">
+                                <div class="d-flex justify-content-start">
+                                    <div class="userData ml-3">
+                                        <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><%= userData.fullName %></h2>
+                                        <h6 class="d-block"> <%= userData.position %></h6>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-12">
+                                    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="basicInfo-tab" data-toggle="tab" href="#basicInfo" role="tab" aria-controls="basicInfo" aria-selected="true">Basic Info</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content ml-1" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="basicInfo" role="tabpanel" aria-labelledby="basicInfo-tab">
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">First Name</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    <%= userData.fname %>
+                                                </div>
+                                            </div>
+                                            <hr />
+
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Last Name</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    <%= userData.lname %>
+                                                </div>
+                                            </div>
+                                            <hr />
+    
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Birth Date</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    <%= userData.bdate %>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            
+                                            <div class="row">
+                                                <div class="col-sm-3 col-md-2 col-5">
+                                                    <label style="font-weight:bold;">Email</label>
+                                                </div>
+                                                <div class="col-md-8 col-6">
+                                                    <%= userData.email %>
+                                                </div>
+                                            </div>
+                                            <hr />
+    
+                                        </div>
+                                        <a type="button" class="btn btn-primary float-right" href="/edit-profile">Edit Profile</a>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+</body>
+</html>
