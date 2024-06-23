@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Fish Finder</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Poppins:400,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="/css/responsive.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+      background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
+    }
+
+    header {
+      text-align: center;
+      padding: 15px;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    main {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 20px;
+    }
+
+    .product-box {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    }
+
+    .product-box:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 255, 1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-box:hover .product-name {
+      color: black;
+    }
+
+    .product-image {
+      width: 225px;
+      height: 150px;
+      background-color: #ddd;
+      margin: 0 auto 10px;
+      border: 2px solid black;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .product-name {
+      font-size: 1.2rem;
+      color: white;
+      margin: 0;
+    }
+
+    .seller-info {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      margin: 20px 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .seller-icon {
+      width: 200px;
+      height: 200px;
+      margin-right: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .seller-details {
+      flex-grow: 0.5;
+      color: white;
+    }
+
+    a.back-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #F7931E;
+      color: black;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 20px;
+      border: 1px solid #F7931E;
+    }
+
+    a.back-button:hover {
+      background-color: transparent;
+      color: white;
+    }
+
+    .product-container a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <!-- header section starts -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index.html">
+            <img src="/images/logo1.png" alt="Logo">
+          </a>
+          <div class="" id="">
+            <div class="User_option">
+              <form class="form-inline my-2 mb-3 mb-lg-0">
+                <input type="search" placeholder="Search">
+                <button class="btn my-sm-0 nav_search-btn" type="submit"></button>
+              </form>
+            </div>
+            <div class="custom_menu-btn">
+              <button onclick="openNav()">
+                <span class="s-1"></span>
+                <span class="s-2"></span>
+                <span class="s-3"></span>
+              </button>
+            </div>
+            <div id="myNav" class="overlay">
+              <div class="overlay-content">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="product-list.html">Products</a>
+                <a href="sellers.html">Sellers</a>
+                <a href="contact.html">Contact Us</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- seller info section -->
+  <section class="seller-info">
+    <img src="https://via.placeholder.com/100" alt="Seller Icon" class="seller-icon">
+    <div class="seller-details">
+      <h2>Seller Name</h2>
+      <p id="store-name"><i class="fas fa-store icon"></i><strong>Store Name:</strong> Store</p>
+      <p id="store-ratings"><i class="fas fa-star icon"></i><strong>Ratings:</strong> 4.5/5</p>
+      <p id="store-location"><i class="fas fa-map-marker-alt icon"></i><strong>Location:</strong> Store Location</p>
+      <p id="store-contact"><i class="fas fa-phone icon"></i><strong>Contact Info:</strong> +01 1234567890</p>
+    </div>
+  </section>
+  <!-- end seller info section -->
+
+  <!-- back-button -->
+  <a href="sellers.html" class="back-button">Back to Sellers List</a>
+
+  <!-- product list section -->
+  <main>
+    <div class="product-container" id="productContainer">
+      <!-- Product placeholders will be dynamically added here -->
+    </div>
+  </main>
+  <!-- end product list section -->
+
+  <!-- info section -->
+  <section class="info_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <div class="info_contact">
+            <h5>CONTACT INFO</h5>
+            <div>
+              <img src="/images/call.png" alt="Phone">
+              <p>+01 1234567890</p>
+            </div>
+            <div>
+              <img src="/images/mail.png" alt="Email">
+              <p>demo@gmail.com</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_time">
+            <h5>Opening Hours Shop</h5>
+            <div>
+              <p>Monday to Friday</p>
+            </div>
+            <div>
+              <p>07:00 am to 04:00 pm</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_social">
+            <h5>Social Media</h5>
+            <div class="social_container">
+              <div>
+                <a href="">
+                  <img src="/images/fb.png" alt="Facebook">
+                </a>
+              </div>
+              <div>
+                <a href="">
+                  <img src="/images/twitter.png" alt="Twitter">
+                </a>
+              </div>
+              <div>
+                <a href="">
+                  <img src="/images/linkedin.png" alt="LinkedIn">
+                </a>
+              </div>
+              <div>
+                <a href="">
+                  <img src="/images/instagram.png" alt="Instagram">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_form pl-lg-4">
+            <h5>Newsletter</h5>
+            <form action="">
+              <input type="text" placeholder="Enter Your Email">
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end info section -->
+
+  <!-- footer section -->
+  <section class="container-fluid footer_section">
+    <p>&copy; 2019 All Rights Reserved. Design by <a href="https://html.design/">Free Html Templates</a></p>
+  </section>
+  <!-- footer section -->
+
+  <script>
+    // Product data
+    const products = [
+      { name: "Fish 1", image: "/images/seller1.jpg" },
+      { name: "Fish 2", image: "/images/seller2.jpg" },
+      { name: "Fish 3", image: "/images/seller3.jpg" },
+      { name: "Fish 4", image: "/images/seller4.jpg" }
+    ];
+
+    // Create product placeholders
+    function createProductPlaceholders() {
+      const productContainer = document.getElementById('productContainer');
+
+      products.forEach((product, index) => {
+        // Create anchor tag for linking
+        const productLink = document.createElement('a');
+        productLink.href = `product-info.html?productId=${index + 1}`;
+
+        const productBox = document.createElement('div');
+        productBox.className = 'product-box';
+
+        const productImage = document.createElement('div');
+        productImage.className = 'product-image';
+        productImage.style.backgroundImage = `url('${product.image}')`;
+
+        const productName = document.createElement('p');
+        productName.className = 'product-name';
+        productName.textContent = product.name;
+
+        // Append image and name to the product box
+        productBox.appendChild(productImage);
+        productBox.appendChild(productName);
+
+        // Append product box to the link
+        productLink.appendChild(productBox);
+
+        // Append the link to the product container
+        productContainer.appendChild(productLink);
+      });
+    }
+
+    // Call the function to create product placeholders
+    document.addEventListener('DOMContentLoaded', createProductPlaceholders);
+  </script>
+</body>
+
+</html>

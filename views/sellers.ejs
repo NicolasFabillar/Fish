@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Fish Finder</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Poppins:400,700&display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="/css/responsive.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+      background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
+      color: white;
+    }
+
+    header {
+      text-align: center;
+      padding: 15px;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    main {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .seller-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 20px;
+    }
+
+    .seller-box {
+      background-color: rgba(255, 255, 255, 0.25);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .seller-box:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 255, 1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .seller-box:hover .seller-name {
+      color: black;
+    }
+
+    .seller-image {
+      width: 100px;
+      height: 100px;
+      background-color: #ddd;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      border: 2px solid black;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .seller-name {
+      font-size: 1.2rem;
+      color: white;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index.html">
+            <img src="/images/logo.png" alt="Logo">
+          </a>
+          <div class="" id="">
+            <div class="User_option">
+              <form class="form-inline my-2 mb-3 mb-lg-0">
+                <input type="search" placeholder="Search">
+                <button class="btn my-sm-0 nav_search-btn" type="submit"></button>
+              </form>
+            </div>
+            <div class="custom_menu-btn">
+              <button onclick="openNav()">
+                <span class="s-1"></span>
+                <span class="s-2"></span>
+                <span class="s-3"></span>
+              </button>
+            </div>
+            <div id="myNav" class="overlay">
+              <div class="overlay-content">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="product-list.html">Products</a>
+                <a href="sellers.html">Sellers</a>
+                <a href="contact.html">Contact Us</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+  </div>
+
+  <main>
+    <h2>Seller List</h2>
+    <div class="seller-container" id="sellerContainer">
+      <!-- Seller placeholders will be dynamically added here -->
+    </div>
+  </main>
+
+  <section class="info_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <div class="info_contact">
+            <h5>CONTACT INFO</h5>
+            <div>
+              <img src="/images/call.png" alt="Phone">
+              <p>+01 1234567890</p>
+            </div>
+            <div>
+              <img src="/images/mail.png" alt="Email">
+              <p>demo@gmail.com</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_time">
+            <h5>Opening Hours Shop</h5>
+            <div>
+              <p>Monday to Friday</p>
+            </div>
+            <div>
+              <p>07:00 am to 04:00 pm</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_social">
+            <h5>Social Media</h5>
+            <div class="social_container">
+              <div>
+                <a href="">
+                  <img src="/images/fb.png" alt="Facebook">
+                </a>
+              </div>
+              <div>
+                <a href="">
+                  <img src="/images/twitter.png" alt="Twitter">
+                </a>
+              </div>
+              <div>
+                <a href="">
+                  <img src="/images/linkedin.png" alt="LinkedIn">
+                </a>
+              </div>
+              <div>
+                <a href="">
+                  <img src="/images/instagram.png" alt="Instagram">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="info_form pl-lg-4">
+            <h5>Newsletter</h5>
+            <form action="">
+              <input type="text" placeholder="Enter Your Email">
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-fluid footer_section">
+    <p>
+      &copy; 2019 All Rights Reserved. Design by
+      <a href="https://html.design/">Free Html Templates</a>
+    </p>
+  </section>
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <script>
+    // Function to toggle the navigation menu
+    function openNav() {
+      document.getElementById("myNav").classList.toggle("menu_width");
+      document.querySelector(".custom_menu-btn").classList.toggle("menu_btn-style");
+    }
+
+    // Simulated seller data with URLs to their pages
+    const sellers = [
+      { name: 'Fish Seller 1', image: '/images/seller1.jpg', url: 'seller1.html' },
+      { name: 'Fish Seller 2', image: '/images/seller2.jpg', url: 'seller2.html' },
+      { name: 'Fish Seller 3', image: '/images/seller3.jpg', url: 'seller3.html' },
+      { name: 'Fish Seller 4', image: '/images/seller4.jpeg', url: 'seller4.html' },
+      { name: 'Fish Seller 5', image: '/images/seller5.jpg', url: 'seller5.html' },
+      { name: 'Fish Seller 6', image: '/images/seller6.jpg', url: 'seller6.html' },
+      { name: 'Fish Seller 7', image: '/images/seller7.jpeg', url: 'seller7.html' },
+      { name: 'Fish Seller 8', image: '/images/seller8.jpg', url: 'seller8.html' },
+      { name: 'Fish Seller 9', image: '/images/seller2.jpg', url: 'seller9.html' },
+      { name: 'Fish Seller 10', image: '/images/seller5.jpg', url: 'seller10.html' },
+      { name: 'Fish Seller 11', image: '/images/seller1.jpg', url: 'seller11.html' },
+      { name: 'Fish Seller 12', image: '/images/seller3.jpg', url: 'seller12.html' },
+      { name: 'Fish Seller 13', image: '/images/seller4.jpeg', url: 'seller13.html' },
+      { name: 'Fish Seller 14', image: '/images/seller6.jpg', url: 'seller14.html' },
+      { name: 'Fish Seller 15', image: '/images/seller8.jpg', url: 'seller15.html' },
+      { name: 'Fish Seller 16', image: '/images/seller1.jpg', url: 'seller16.html' }
+    ];
+
+    // Function to dynamically create seller placeholders
+    function createSellerPlaceholders() {
+      const sellerContainer = document.getElementById('sellerContainer');
+
+      sellers.forEach(seller => {
+        const sellerBox = document.createElement('a'); // Create an anchor tag
+        sellerBox.className = 'seller-box';
+        sellerBox.href = 'sellerinfo.html'; // Set the URL to redirect to
+
+        const sellerImage = document.createElement('div');
+        sellerImage.className = 'seller-image';
+        sellerImage.style.backgroundImage = `url('${seller.image}')`;
+
+        const sellerName = document.createElement('p');
+        sellerName.className = 'seller-name';
+        sellerName.textContent = seller.name;
+
+        sellerBox.appendChild(sellerImage);
+        sellerBox.appendChild(sellerName);
+
+        sellerContainer.appendChild(sellerBox);
+      });
+    }
+
+    // Call the function to create seller placeholders on page load
+    createSellerPlaceholders();
+  </script>
+</body>
+
+</html>
