@@ -124,6 +124,53 @@ exports.listFish = (req, res) => {
     });
 };
 
+exports.productRender = (req, res) => {
+    db.query('SELECT * FROM fish_listings', (error, results) => {
+        if (error) {
+            console.log("error: ", error);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        const allFishListings = {
+            fishData: results.map((row, index) => ({
+                id: index, 
+                fish_name: capitalize(row.fish_name),
+                description: row.description,
+                price: row.price,
+                img: row.fish_img,
+            }))
+        };
+        console.log(allFishListings)
+
+        res.render('product-list', { allFishListings });
+    });
+};
+
+// exports.productRender = (req, res) => {
+//     db.query('SELECT * FROM fish_listings', (error, results) => {
+//         if (error) {
+//             console.log("error: ", error);
+//             return res.status(500).send('Internal Server Error');
+//         }
+
+//         const allFishListings = {
+//             employeeData: results.map((row, index) => ({
+//                 id: index + 1, 
+//                 fname: capitalize(row.first_name),
+//                 lname: capitalize(row.last_name),
+//                 fullName: capitalize(row.first_name) + " " + capitalize(row.last_name),
+//                 bdate: new Date(row.birth_date).toLocaleDateString(),
+//                 email: row.email,
+//                 position: row.position,
+//                 salary: row.salary,
+//             }))
+//         };
+//         console.log()
+
+//         res.render('home', { allEmployeeData });
+//     });
+// };
+
 exports.logout = (req, res) => {
     req.session.destroy(err => {
         if (err) {

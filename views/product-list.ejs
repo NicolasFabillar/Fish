@@ -152,7 +152,19 @@
           <h2>Product List Page</h2>
           <br>
           <div class="row" id="product-list">
-            <!-- Fish cards will be dynamically added here -->
+            <% allFishListings.fishData.forEach(function(fishData) {%> 
+              <div class="col-md-3">
+                <a href="product-info.html?id=1" class="card-link">
+                  <div class="card">
+                    <img src="/fish_uploads/<%= fishData.img %>" alt="<%= fishData.img %>">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= fishData.fish_name %></h5>
+                      <p class="card-text"><%= fishData.description %></p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <% }) %>
           </div>
         </div>
       </div>
@@ -237,7 +249,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script>
+<!-- <script>
   // Function to toggle the navigation menu
   function openNav() {
     document.getElementById("myNav").classList.toggle("menu_width");
@@ -292,6 +304,6 @@
   document.addEventListener('DOMContentLoaded', () => {
     displayFishCards(fishes);
   });
-</script>
+</script> -->
 </body>
 </html>
