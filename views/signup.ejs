@@ -17,6 +17,9 @@
                Buyer
             </div>
          </div>
+         <% if (message) { %>
+            <h4 class="alert alert-danger mt-5"><%= message %></h4>
+        <% } %>
          <div class="form-container">
             <div class="slide-controls">
                <input type="radio" name="slide" id="login" checked>
@@ -26,24 +29,25 @@
                <div class="slider-tab"></div>
             </div>
             <div class="form-inner">
-               <form action="#" class="login">
+               <form action = "/auth/register" method = "POST" class="login">
+               <input type="hidden" name="userType" value=1>
                 <div class="field">
-                  <input type="Name" placeholder="Last Name" required>
+                  <input type="Name" placeholder="Last Name" id="fname" name = "fname" required>
                </div>
                <div class="field">
-                <input type="Name" placeholder="First Name" required>
+                <input type="Name" placeholder="First Name" id="lname" name = "lname"required>
               </div>
                 <div class="field">
-                    <input type="Location" placeholder="City" required>
+                    <input type="Location" placeholder="City" id="city" name = "city" required>
                 </div>
                 <div class="field">
-                    <input type="Contact" placeholder="Contact Number" required>
+                    <input type="Contact" placeholder="Contact Number" id="contact" name = "contact" required>
                  </div>
                   <div class="field">
-                     <input type="text" placeholder="Email Address" required>
+                     <input type="text" placeholder="Email Address" id="email" name = "email" required>
                   </div>
                   <div class="field">
-                     <input type="password" placeholder="Password" required>
+                     <input type="password" placeholder="Password" id="password" name = "password" required>
                   </div>
                   <div class="field btn">
                      <div class="btn-layer"></div>
@@ -51,21 +55,25 @@
                   </div>
                </form>
 
-               <form action="#" class="login">
+               <form action = "/auth/register" method = "POST" class="login" class="login">
+               <input type="hidden" name="userType" value=0>
                 <div class="field">
-                    <input type="Name" placeholder="Last Name" required>
+                    <input type="Name" placeholder="Last Name" id="fname" name = "fname" required>
                  </div>
                  <div class="field">
-                  <input type="Name" placeholder="First Name" required>
+                  <input type="Name" placeholder="First Name" id="lname" name = "lname" required>
                 </div>
+                <div class="field">
+                  <input type="Location" placeholder="City" id="city" name = "city" required>
+                  </div>
                   <div class="field">
-                      <input type="Contact" placeholder="Contact Number" required>
+                      <input type="Contact" placeholder="Contact Number" id="contact" name = "contact" required>
                    </div>
                     <div class="field">
-                       <input type="text" placeholder="Email Address" required>
+                       <input type="text" placeholder="Email Address" id="email" name = "email" required>
                     </div>
                     <div class="field">
-                       <input type="password" placeholder="Password" required>
+                       <input type="password" placeholder="Password" id="password" name = "password" required>
                     </div>
                     <div class="field btn">
                        <div class="btn-layer"></div>

@@ -27,12 +27,12 @@ router.get("/sellers", (req,res) => {
     res.render("sellers")
 });
 
-router.get("/loginN", (req,res) => {
-    res.render("loginN")
+router.get("/loginOLD", (req,res) => {
+    res.render("loginOLD", messafe = false)
 });
 
-router.get("/indexN", (req,res) => {
-    res.render("indexN")
+router.get("/indexOLD", (req,res) => {
+    res.render("indexOLD")
 });
 
 router.get("/register", (req,res) => {
@@ -40,7 +40,7 @@ router.get("/register", (req,res) => {
 });
 
 router.get("/login", (req,res) => {
-    res.render("login", message=false)
+    res.render("login")
 });
 
 router.get("/signup", (req,res) => {

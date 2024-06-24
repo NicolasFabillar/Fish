@@ -30,7 +30,7 @@ exports.login = (req,res) => {
         }
         if (results[0].password == password) {
             req.session.userEmail = email;
-            res.redirect('/home')
+            res.redirect('/')
         }
         if (results[0].password != password) {
             return res.render('login', {
@@ -45,22 +45,18 @@ exports.register = (req,res) => {
 
     console.log(req.body);
 
-    const { fname, lname, bdate, email, position, password, passwordConfirm } = req.body;
+    const { fname, lname, email, city, contact, password, userType } = req.body;
 
     db.query('SELECT email FROM users WHERE email = ?', [email], (error, results) => {
         if (error) {
             console.log("error: ", error)
         }
         if (results.length > 0) {
-            return res.render('register', {
+            return res.render('signup', {
                 message: 'That email is already in use'
             })
-        } else if (password != passwordConfirm) {
-            return res.render('register', {
-                message: 'Passwords do not match'
-            });
         }
-        db.query("INSERT INTO users SET ? ", {first_name: fname, last_name: lname, birth_date:bdate, email: email, position: position, password: password}, (error, results) => {
+        db.query("INSERT INTO users SET ? ", {first_name: fname, last_name: lname, email: email, contact_number: contact, city: city, password: password, is_Seller: userType}, (error, results) => {
             if (error){
                 console.log("error: ",error);
             } else{
