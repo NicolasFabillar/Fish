@@ -72,13 +72,13 @@
     button {
       background-color: #007bff;
       display: inline-block;
-	  padding: 10px 20px;
-	  background-color: #F7931E;
-	  color: black;
-	  text-decoration: none;
-	  border-radius: 5px;
-	  margin: 20px;
-	  border: 1px solid #F7931E;
+      padding: 10px 20px;
+      background-color: #F7931E;
+      color: black;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 20px;
+      border: 1px solid #F7931E;
     }
 
   </style>
@@ -86,10 +86,10 @@
 <body>
   <div class="container">
     <h1>Listing Form</h1>
-    <form action="#" method="POST"> <!-- Replace "#" with your form action URL -->
+    <form action="/auth/api/listfish" method="POST" enctype="multipart/form-data"> <!-- Added enctype attribute -->
       <div class="form-group">
         <label for="title">Fish Name:</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="fish_name" required>
       </div>
       <div class="form-group">
         <label for="description">Description:</label>
@@ -103,15 +103,15 @@
         <label for="category">Category:</label>
         <select id="category" name="category" required>
           <option value="">Select category...</option>
-          <option value="electronics">Freshwater</option>
-          <option value="furniture">Saltwater</option>
-          <option value="clothing">Pet</option>
+          <option value="freshwater">Freshwater</option>
+          <option value="saltwater">Saltwater</option>
+          <option value="pet">Pet</option>
           <!-- Add more options as needed -->
         </select>
       </div>
       <div class="form-group">
         <label for="photo">Photo:</label>
-        <input type="file" id="photo" name="photo" accept="image/*" required>
+        <input type="file" id="photo" name="fishPhoto" accept="image/*" required>
       </div>
       <button type="submit">Submit Listing</button>
     </form>

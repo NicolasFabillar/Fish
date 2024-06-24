@@ -1,7 +1,9 @@
 const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const bcrypt =  require("bcryptjs");
-const router = require("express")
+const router = require("express");
+const path = require("path");
+const fs = require('fs');
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -30,6 +32,7 @@ exports.login = (req,res) => {
         }
         if (results[0].password == password) {
             req.session.userEmail = email;
+            req.session.userID = results[0].id
             res.redirect('/')
         }
         if (results[0].password != password) {
@@ -69,6 +72,58 @@ exports.register = (req,res) => {
     });
 }
 
+exports.listFish = (req, res) => {
+
+    const userID = req.session.userID;
+    const { fish_name, description, price, category } = req.body;
+    const fishPhoto = req.file;
+    
+    if (!fishPhoto) {
+        return res.render('listingform', {
+            message: 'No file uploaded'
+        });
+    }
+
+    const targetDirectory = path.join(__dirname, "../public/fish_uploads/");
+
+    db.query('SELECT * FROM fish_listings WHERE sellerID = ? AND fish_name = ?', 
+        [userID, fish_name], (error, results) => {
+        if (error) {
+            console.error("Database query error: ", error);
+            return res.status(500).send('Database query error');
+        }
+        if (results.length > 0) {
+            return res.render('listingform', {
+                message: 'That fish is already listed'
+            });
+        }
+        
+        const targetPath = path.join(targetDirectory, fishPhoto.originalname);
+
+        fs.writeFile(targetPath, fishPhoto.buffer, (error) => {
+            if (error) {
+                console.error('File write error:', error);
+                return res.status(500).send('File write error');
+            }
+            console.log(`File has been moved to ${targetPath}`);
+
+            const query = 'INSERT INTO fish_listings (sellerID, fish_name, description, price, category, fish_img) VALUES (?, ?, ?, ?, ?, ?)';
+            const values = [userID, fish_name, description, price, category, fishPhoto.originalname];
+
+            db.query(query, values, (err, result) => {
+                if (err) {
+                    console.error('Database insert error:', err);
+                    return res.status(500).send('Database insert error');
+                }
+
+                return res.render('listingform', {
+                    message: 'Listing Successful'
+                });
+            });
+        });
+    });
+};
+
 exports.logout = (req, res) => {
     req.session.destroy(err => {
         if (err) {
@@ -95,31 +150,6 @@ exports.updateProfile = (req, res) => {
 
         req.session.message = "Profile updated successfully";
         res.redirect('/edit-profile')
-    });
-};
-
-exports.employeeRender = (req, res) => {
-    db.query('SELECT * FROM users INNER JOIN salary ON users.position = salary.position', (error, results) => {
-        if (error) {
-            console.log("error: ", error);
-            return res.status(500).send('Internal Server Error');
-        }
-
-        const allEmployeeData = {
-            employeeData: results.map((row, index) => ({
-                id: index + 1, 
-                fname: capitalize(row.first_name),
-                lname: capitalize(row.last_name),
-                fullName: capitalize(row.first_name) + " " + capitalize(row.last_name),
-                bdate: new Date(row.birth_date).toLocaleDateString(),
-                email: row.email,
-                position: row.position,
-                salary: row.salary,
-            }))
-        };
-        console.log()
-
-        res.render('home', { allEmployeeData });
     });
 };
 
