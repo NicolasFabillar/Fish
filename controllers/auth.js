@@ -173,6 +173,24 @@ exports.productInfoRender = (req, res) => {
     });
 };
 
+exports.sellersRender = (req, res) => {
+    db.query('SELECT * FROM users WHERE is_Seller = ?',[1], (error, results) => {
+        if (error) {
+            console.log("error: ", error);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        const allSellers = {
+            Seller: results.map((row, index) => ({
+                id: row.id, 
+                fullName: capitalize(row.first_name) + " " + capitalize(row.last_name),
+            }))
+        };
+
+        res.render('sellers', { allSellers });
+    });
+};
+
 // exports.productRender = (req, res) => {
 //     db.query('SELECT * FROM fish_listings', (error, results) => {
 //         if (error) {

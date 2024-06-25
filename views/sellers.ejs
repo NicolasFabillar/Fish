@@ -140,7 +140,12 @@
   <main>
     <h2>Seller List</h2>
     <div class="seller-container" id="sellerContainer">
-      <!-- Seller placeholders will be dynamically added here -->
+      <% allSellers.Seller.forEach(function(Seller) {%> 
+        <a href="product_info.html" class="seller-box">
+          <div class="seller-image" style="background-image: url('/images/fish1.jpg');"></div>
+          <p class="seller-name"><%= Seller.fullName %></p>
+        </a>
+        <% }) %>
     </div>
   </main>
 
@@ -227,53 +232,6 @@
       document.getElementById("myNav").classList.toggle("menu_width");
       document.querySelector(".custom_menu-btn").classList.toggle("menu_btn-style");
     }
-
-    // Simulated seller data with URLs to their pages
-    const sellers = [
-      { name: 'Fish Seller 1', image: '/images/seller1.jpg', url: 'seller1.html' },
-      { name: 'Fish Seller 2', image: '/images/seller2.jpg', url: 'seller2.html' },
-      { name: 'Fish Seller 3', image: '/images/seller3.jpg', url: 'seller3.html' },
-      { name: 'Fish Seller 4', image: '/images/seller4.jpeg', url: 'seller4.html' },
-      { name: 'Fish Seller 5', image: '/images/seller5.jpg', url: 'seller5.html' },
-      { name: 'Fish Seller 6', image: '/images/seller6.jpg', url: 'seller6.html' },
-      { name: 'Fish Seller 7', image: '/images/seller7.jpeg', url: 'seller7.html' },
-      { name: 'Fish Seller 8', image: '/images/seller8.jpg', url: 'seller8.html' },
-      { name: 'Fish Seller 9', image: '/images/seller2.jpg', url: 'seller9.html' },
-      { name: 'Fish Seller 10', image: '/images/seller5.jpg', url: 'seller10.html' },
-      { name: 'Fish Seller 11', image: '/images/seller1.jpg', url: 'seller11.html' },
-      { name: 'Fish Seller 12', image: '/images/seller3.jpg', url: 'seller12.html' },
-      { name: 'Fish Seller 13', image: '/images/seller4.jpeg', url: 'seller13.html' },
-      { name: 'Fish Seller 14', image: '/images/seller6.jpg', url: 'seller14.html' },
-      { name: 'Fish Seller 15', image: '/images/seller8.jpg', url: 'seller15.html' },
-      { name: 'Fish Seller 16', image: '/images/seller1.jpg', url: 'seller16.html' }
-    ];
-
-    // Function to dynamically create seller placeholders
-    function createSellerPlaceholders() {
-      const sellerContainer = document.getElementById('sellerContainer');
-
-      sellers.forEach(seller => {
-        const sellerBox = document.createElement('a'); // Create an anchor tag
-        sellerBox.className = 'seller-box';
-        sellerBox.href = 'sellerinfo.html'; // Set the URL to redirect to
-
-        const sellerImage = document.createElement('div');
-        sellerImage.className = 'seller-image';
-        sellerImage.style.backgroundImage = `url('${seller.image}')`;
-
-        const sellerName = document.createElement('p');
-        sellerName.className = 'seller-name';
-        sellerName.textContent = seller.name;
-
-        sellerBox.appendChild(sellerImage);
-        sellerBox.appendChild(sellerName);
-
-        sellerContainer.appendChild(sellerBox);
-      });
-    }
-
-    // Call the function to create seller placeholders on page load
-    createSellerPlaceholders();
   </script>
 </body>
 

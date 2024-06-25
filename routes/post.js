@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {productRender, userRender, editUserRender, logout, productInfoRender} = require("../controllers/auth")
+const {productRender, userRender, editUserRender, logout, productInfoRender, sellersRender} = require("../controllers/auth")
 
 router.get("/", (req,res) => {
     res.render("index")
@@ -15,12 +15,10 @@ router.get("/product_list", productRender); // render product list
 
 router.get("/product_info", productInfoRender); // render product info
 
+router.get("/sellers", sellersRender); // render product info
+
 router.get("/sellerinfo", (req,res) => {
     res.render("sellerinfo")
-});
-
-router.get("/sellers", (req,res) => {
-    res.render("sellers")
 });
 
 router.get("/loginOLD", (req,res) => {

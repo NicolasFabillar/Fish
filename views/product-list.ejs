@@ -249,61 +249,12 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!-- <script>
+<script>
   // Function to toggle the navigation menu
   function openNav() {
     document.getElementById("myNav").classList.toggle("menu_width");
     document.querySelector(".custom_menu-btn").classList.toggle("menu_btn-style");
   }
-
-  // Simulated fish data (replace with actual data fetching from database)
-  const fishes = [
-    { id: 1, name: 'Gold Fish', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', image: '/images/fish2.jpg' },
-    { id: 2, name: 'Koi Fish', description: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.', image: '/images/fish2.jpg' },
-    { id: 3, name: 'Tropical Fish', description: 'Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.', image: '/images/fish2.jpg' },
-    { id: 4, name: 'Beta Fish', description: 'Donec eu libero sit amet quam egestas semper.', image: '/images/fish2.jpg' },
-    { id: 5, name: 'Beta Fish', description: 'Donec eu libero sit amet quam egestas semper.', image: '/images/fish2.jpg' },
-    { id: 6, name: 'Beta Fish', description: 'Donec eu libero sit amet quam egestas semper.', image: '/images/fish2.jpg' },
-    { id: 7, name: 'Beta Fish', description: 'Donec eu libero sit amet quam egestas semper.', image: '/images/fish2.jpg' },
-    { id: 8, name: 'Beta Fish', description: 'Donec eu libero sit amet quam egestas semper.', image: '/images/fish2.jpg' },
-    { id: 9, name: 'Beta Fish', description: 'Donec eu libero sit amet quam egestas semper.', image: '/images/fish2.jpg' },
-    { id: 10, name: 'Guppy Fish', description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', image: '/images/fish2.jpg' },
-    { id: 11, name: 'Angelfish', description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', image: '/images/fish2.jpg' },
-    { id: 12, name: 'Catfish', description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', image: '/images/fish2.jpg' },
-    { id: 13, name: 'Discus Fish', description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', image: '/images/fish2.jpg' }
-  ];
-
-  // Function to create a fish card
-  function createFishCard(fish) {
-    const card = document.createElement('div');
-    card.className = 'col-md-3';
-    card.innerHTML = `
-      <a href="product-info.html?id=${fish.id}" class="card-link">
-        <div class="card">
-          <img src="${fish.image}" alt="${fish.name}">
-          <div class="card-body">
-            <h5 class="card-title">${fish.name}</h5>
-            <p class="card-text">${fish.description}</p>
-          </div>
-        </div>
-      </a>
-    `;
-    return card;
-  }
-
-  // Function to display fish cards on the page
-  function displayFishCards(fishes) {
-    const productList = document.getElementById('product-list');
-    fishes.forEach(fish => {
-      const card = createFishCard(fish);
-      productList.appendChild(card);
-    });
-  }
-
-  // Display fish cards on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    displayFishCards(fishes);
-  });
-</script> -->
+</script>
 </body>
 </html>
