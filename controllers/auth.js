@@ -160,15 +160,29 @@ exports.productInfoRender = (req, res) => {
     
         const fishData = {
             id: results[0].id,  
+            seller: results[0].sellerID,  
             fish_name: capitalize(results[0].fish_name),
             description: results[0].description,
             price: results[0].price,
             img: results[0].fish_img,
         };
-    
-        console.log(fishData);
 
-        res.render('product-info', { fishData });
+        db.query('SELECT * FROM users WHERE id = ?', [fishData.seller], (error, results) => {
+            if (error) {
+                console.log("Error fetching fish listings: ", error);
+                return res.status(500).send('Internal Server Error');
+            }
+
+            const sellerData = {
+                id: results[0].id,
+                fullName: capitalize(results[0].first_name) + " " + capitalize(results[0].last_name),
+                contact: results[0].contact_number,
+                email: results[0].email,
+                city: results[0].city,
+            };
+
+            res.render('product-info', { fishData, sellerData });
+        });
     });
 };
 
