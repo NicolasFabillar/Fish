@@ -141,7 +141,7 @@
     <h2>Seller List</h2>
     <div class="seller-container" id="sellerContainer">
       <% allSellers.Seller.forEach(function(Seller) {%> 
-        <a href="product_info.html" class="seller-box">
+        <a href="/seller_info?id=<%= Seller.id %>" class="seller-box">
           <div class="seller-image" style="background-image: url('/images/fish1.jpg');"></div>
           <p class="seller-name"><%= Seller.fullName %></p>
         </a>

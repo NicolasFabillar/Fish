@@ -32,6 +32,7 @@
       padding: 0;
       background-color: #000000;
       background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
+      color: white;
     }
 
     header {
@@ -62,12 +63,14 @@
     }
 
     .product-box {
+      position: relative;
       background-color: rgba(255, 255, 255, 0.2);
       border-radius: 10px;
       padding: 20px;
       text-align: center;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
     }
 
     .product-box:hover {
@@ -184,11 +187,11 @@
   <section class="seller-info">
     <img src="https://via.placeholder.com/100" alt="Seller Icon" class="seller-icon">
     <div class="seller-details">
-      <h2>Seller Name</h2>
+      <h2><%= sellerData.fullName %></h2>
       <p id="store-name"><i class="fas fa-store icon"></i><strong>Store Name:</strong> Store</p>
       <p id="store-ratings"><i class="fas fa-star icon"></i><strong>Ratings:</strong> 4.5/5</p>
-      <p id="store-location"><i class="fas fa-map-marker-alt icon"></i><strong>Location:</strong> Store Location</p>
-      <p id="store-contact"><i class="fas fa-phone icon"></i><strong>Contact Info:</strong> +01 1234567890</p>
+      <p id="store-location"><i class="fas fa-map-marker-alt icon"></i><strong>Location:</strong> <%= sellerData.city %></p>
+      <p id="store-contact"><i class="fas fa-phone icon"></i><strong>Contact Info:</strong> <%= sellerData.contact %></p>
     </div>
   </section>
   <!-- end seller info section -->
@@ -199,7 +202,14 @@
   <!-- product list section -->
   <main>
     <div class="product-container" id="productContainer">
-      <!-- Product placeholders will be dynamically added here -->
+      <!-- Dynamic product boxes -->
+      <% allFishListings.fishData.forEach(function(fishData) { %>
+      <div class="product-box">
+        <a href="/product_info?id=<%= fishData.id %>" class="card-link"></a>
+        <div class="product-image" style="background-image: url('/fish_uploads/<%= fishData.img %>');"></div>
+        <p class="product-name"><%= fishData.fish_name %></p>
+      </div>
+      <% }); %>
     </div>
   </main>
   <!-- end product list section -->
@@ -237,22 +247,22 @@
             <h5>Social Media</h5>
             <div class="social_container">
               <div>
-                <a href="">
+                <a href="#">
                   <img src="/images/fb.png" alt="Facebook">
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="#">
                   <img src="/images/twitter.png" alt="Twitter">
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="#">
                   <img src="/images/linkedin.png" alt="LinkedIn">
                 </a>
               </div>
               <div>
-                <a href="">
+                <a href="#">
                   <img src="/images/instagram.png" alt="Instagram">
                 </a>
               </div>
@@ -280,48 +290,28 @@
   <!-- footer section -->
 
   <script>
-    // Product data
-    const products = [
-      { name: "Fish 1", image: "/images/seller1.jpg" },
-      { name: "Fish 2", image: "/images/seller2.jpg" },
-      { name: "Fish 3", image: "/images/seller3.jpg" },
-      { name: "Fish 4", image: "/images/seller4.jpg" }
-    ];
-
-    // Create product placeholders
-    function createProductPlaceholders() {
-      const productContainer = document.getElementById('productContainer');
-
-      products.forEach((product, index) => {
-        // Create anchor tag for linking
-        const productLink = document.createElement('a');
-        productLink.href = `product-info.html?productId=${index + 1}`;
-
-        const productBox = document.createElement('div');
-        productBox.className = 'product-box';
-
-        const productImage = document.createElement('div');
-        productImage.className = 'product-image';
-        productImage.style.backgroundImage = `url('${product.image}')`;
-
-        const productName = document.createElement('p');
-        productName.className = 'product-name';
-        productName.textContent = product.name;
-
-        // Append image and name to the product box
-        productBox.appendChild(productImage);
-        productBox.appendChild(productName);
-
-        // Append product box to the link
-        productLink.appendChild(productBox);
-
-        // Append the link to the product container
-        productContainer.appendChild(productLink);
+    // JavaScript for product box click
+    document.addEventListener('DOMContentLoaded', function () {
+      const productBoxes = document.querySelectorAll('.product-box');
+      productBoxes.forEach(box => {
+        box.addEventListener('click', function () {
+          const link = this.querySelector('.card-link');
+          if (link) {
+            window.location.href = link.href;
+          }
+        });
       });
+    });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
+    // Function to toggle the navigation menu
+    function openNav() {
+      document.getElementById("myNav").classList.toggle("menu_width");
+      document.querySelector(".custom_menu-btn").classList.toggle("menu_btn-style");
     }
-
-    // Call the function to create product placeholders
-    document.addEventListener('DOMContentLoaded', createProductPlaceholders);
   </script>
 </body>
 

@@ -147,7 +147,6 @@ exports.productRender = (req, res) => {
 
 exports.productInfoRender = (req, res) => {
     const fishID = req.query.id
-    console.log(fishID)
 
     db.query('SELECT * FROM fish_listings WHERE id = ?', [fishID], (error, results) => {
         if (error) {
@@ -190,6 +189,48 @@ exports.sellersRender = (req, res) => {
         res.render('sellers', { allSellers });
     });
 };
+
+exports.sellerInfoRender = (req, res) => {
+    const sellerID = req.query.id;
+
+    db.query('SELECT * FROM users WHERE id = ?', [sellerID], (error, userResults) => {
+        if (error) {
+            console.log("Error fetching seller info: ", error);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        if (userResults.length === 0) {
+            return res.status(404).send('Seller not found');
+        }
+
+        const sellerData = {
+            id: userResults[0].id,
+            fullName: capitalize(userResults[0].first_name) + " " + capitalize(userResults[0].last_name),
+            contact: userResults[0].contact_number,
+            email: userResults[0].email,
+            city: userResults[0].city,
+        };
+
+        db.query('SELECT * FROM fish_listings WHERE sellerID = ?', [sellerID], (fishError, fishResults) => {
+            if (fishError) {
+                console.log("Error fetching fish listings: ", fishError);
+                return res.status(500).send('Internal Server Error');
+            }
+
+            const allFishListings = {
+                fishData: fishResults.map(row => ({
+                    id: row.id,
+                    fish_name: capitalize(row.fish_name),
+                    description: row.description,
+                    price: row.price,
+                    img: row.fish_img,
+                }))
+            };
+            res.render('sellerinfo', { sellerData, allFishListings });
+        });
+    });
+};
+
 
 // exports.productRender = (req, res) => {
 //     db.query('SELECT * FROM fish_listings', (error, results) => {
