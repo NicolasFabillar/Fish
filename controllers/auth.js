@@ -133,16 +133,43 @@ exports.productRender = (req, res) => {
 
         const allFishListings = {
             fishData: results.map((row, index) => ({
-                id: index, 
+                id: row.id, 
                 fish_name: capitalize(row.fish_name),
                 description: row.description,
                 price: row.price,
                 img: row.fish_img,
             }))
         };
-        console.log(allFishListings)
 
         res.render('product-list', { allFishListings });
+    });
+};
+
+exports.productInfoRender = (req, res) => {
+    const fishID = req.query.id
+    console.log(fishID)
+
+    db.query('SELECT * FROM fish_listings WHERE id = ?', [fishID], (error, results) => {
+        if (error) {
+            console.log("error: ", error);
+            return res.status(500).send('Internal Server Error');
+        }
+    
+        if (results.length === 0) {
+            return res.status(404).send('Fish not found');
+        }
+    
+        const fishData = {
+            id: results[0].id,  
+            fish_name: capitalize(results[0].fish_name),
+            description: results[0].description,
+            price: results[0].price,
+            img: results[0].fish_img,
+        };
+    
+        console.log(fishData);
+
+        res.render('product-info', { fishData });
     });
 };
 

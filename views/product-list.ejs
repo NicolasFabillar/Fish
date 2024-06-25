@@ -154,7 +154,7 @@
           <div class="row" id="product-list">
             <% allFishListings.fishData.forEach(function(fishData) {%> 
               <div class="col-md-3">
-                <a href="product-info.html?id=1" class="card-link">
+                <a href="/product_info?id=<%= fishData.id %>" class="card-link">
                   <div class="card">
                     <img src="/fish_uploads/<%= fishData.img %>" alt="<%= fishData.img %>">
                     <div class="card-body">
