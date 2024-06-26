@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 26, 2024 at 05:36 PM
+-- Generation Time: Jun 26, 2024 at 05:45 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -31,11 +31,11 @@ DROP TABLE IF EXISTS `fish_listings`;
 CREATE TABLE IF NOT EXISTS `fish_listings` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sellerID` int NOT NULL,
-  `fish_name` varchar(150) NOT NULL,
-  `description` varchar(150) NOT NULL,
-  `category` varchar(150) NOT NULL,
+  `fish_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `category` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `price` int NOT NULL,
-  `fish_img` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `fish_img` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
