@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 11, 2024 at 12:15 PM
+-- Generation Time: Jun 26, 2024 at 05:36 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -24,13 +24,39 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `fish_listings`
+--
+
+DROP TABLE IF EXISTS `fish_listings`;
+CREATE TABLE IF NOT EXISTS `fish_listings` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `sellerID` int NOT NULL,
+  `fish_name` varchar(150) NOT NULL,
+  `description` varchar(150) NOT NULL,
+  `category` varchar(150) NOT NULL,
+  `price` int NOT NULL,
+  `fish_img` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `fish_listings`
+--
+
+INSERT INTO `fish_listings` (`id`, `sellerID`, `fish_name`, `description`, `category`, `price`, `fish_img`) VALUES
+(1, 12, 'Nemo', 'sadadas', 'freshwater', 32232, 'White Black Neon Green Modern SWOT Analysis Infographics (1).png'),
+(2, 12, 'Nemooo', 'dasdasdas', 'freshwater', 32232, '2024-Yamaha-XS125-EU-Heritage_White-Static-004-03.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `salary`
 --
 
 DROP TABLE IF EXISTS `salary`;
 CREATE TABLE IF NOT EXISTS `salary` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `position` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `position` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `salary` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -57,31 +83,40 @@ INSERT INTO `salary` (`id`, `position`, `salary`) VALUES
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `last_name` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `birth_date` date NOT NULL,
-  `email` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `position` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `first_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `city` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `contact_number` int NOT NULL,
+  `password` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `is_Seller` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `birth_date`, `email`, `position`, `password`) VALUES
-(0, 'Maria Jose', 'Santos', '2022-03-11', 'banana@gmail.com', 'Backend Developer', '12334'),
-(1, 'Jose', 'Reyes', '2003-11-08', 'Straw@gmail.com', 'Backend Developer', '0000'),
-(2, 'Angelica', 'Cruze', '0200-10-08', 'blue@gmail.com', 'Accountant', 'blue12'),
-(3, 'Andres', 'Rivera', '1999-07-15', 'hotdog@gmail.com', 'Team Manager', '1234'),
-(4, 'Sofia', 'Cruz', '2000-04-28', 'YOLO@gmail.com', 'Human Resources', '1234'),
-(5, 'Jimboy', 'Reyes', '1997-11-21', 'jimboy@gmail.com', 'IT Project Manager', 'qwe'),
-(6, 'Dela', 'Cruz', '1997-11-21', 'Cruz@gmail.com', 'Database Administrator', '1234'),
-(7, 'Miguel', 'Fernandez', '1990-10-30', 'miguel@gmail.com', 'Software Developer', '12334'),
-(9, 'nicolas', 'fabillar', '2003-02-04', 'nicosfabilla@gmail.com', 'Software Developer', '12334'),
-(10, 'Hotdog', 'Hatt', '2023-12-22', 'Hotdog1@gmail.com', 'Software Developer', '12334'),
-(11, 'Shimia', 'Shimmy', '2023-12-05', 'Shimmy@gmail.com', 'Backend Developer', '1282');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `city`, `email`, `contact_number`, `password`, `is_Seller`) VALUES
+(0, 'Maria Jose', 'Santos', '', 'banana@gmail.com', 0, '12334', 0),
+(1, 'Jose', 'Reyes', '', 'Straw@gmail.com', 0, '0000', 0),
+(2, 'Angelica', 'Cruze', '', 'blue@gmail.com', 0, 'blue12', 0),
+(3, 'Andres', 'Rivera', '', 'hotdog@gmail.com', 0, '1234', 0),
+(4, 'Sofia', 'Cruz', '', 'YOLO@gmail.com', 0, '1234', 0),
+(5, 'Jimboy', 'Reyes', '', 'jimboy@gmail.com', 0, 'qwe', 0),
+(6, 'Dela', 'Cruz', '', 'Cruz@gmail.com', 0, '1234', 0),
+(7, 'Miguel', 'Fernandez', '', 'miguel@gmail.com', 0, '12334', 0),
+(9, 'nicolas', 'fabillar', '', 'nicosfabilla@gmail.com', 0, '12334', 0),
+(10, 'Hotdog', 'Hatt', '', 'Hotdog1@gmail.com', 0, '12334', 0),
+(11, 'Shimia', 'Shimmy', '', 'Shimmy@gmail.com', 0, '1282', 0),
+(12, 'nico', 'nico', 'San Fernando', 'banana1@gmail.com', 2147483647, '@1banana', 1),
+(13, 'nico', 'nico', 'San Fernando', 'banana2@gmail.com', 2147483647, '@1banana', 1),
+(14, 'nico', 'nico', 'San Fernando', 'banana3@gmail.com', 2147483647, '@1banana', 0),
+(15, 'nico', 'nico', 'San Fernando', 'banana4@gmail.com', 2147483647, '@1banana', 1),
+(16, 'nico', 'nico', 'San Fernando', 'banana8@gmail.com', 2147483647, '@1banana', 1),
+(17, 'nico', 'nico', 'San Fernando', 'banana9@gmail.com', 2147483647, 'asdasdasdasd', 1),
+(18, 'nico', 'nico', 'San Fernando', 'banana10@gmail.com', 2147483647, 'sadasdasd', 1),
+(19, 'nico', 'nico', 'San Fernando', 'banana30@gmail.com', 2147483647, '@1banana', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
