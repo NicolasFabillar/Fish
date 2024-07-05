@@ -137,6 +137,22 @@
       color: white;
     }
 
+    .edit-profile-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #F7931E;
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 20px;
+      border: 1px solid #000000;
+    }
+
+    .edit-profile-button:hover {
+      background-color: transparent;
+      color: #4CAF50;
+    }
+
     .product-container a {
       text-decoration: none;
       color: inherit;
@@ -192,6 +208,7 @@
       <p id="store-ratings"><i class="fas fa-star icon"></i><strong>Ratings:</strong> 4.5/5</p>
       <p id="store-location"><i class="fas fa-map-marker-alt icon"></i><strong>Location:</strong> <%= sellerData.city %></p>
       <p id="store-contact"><i class="fas fa-phone icon"></i><strong>Contact Info:</strong> <%= sellerData.contact %></p>
+      <a href="/edit" class="edit-profile-button">Edit Profile</a>
     </div>
   </section>
   <!-- end seller info section -->
