@@ -15,6 +15,10 @@ router.get("/edit", (req,res) => {
     res.render("edit")
 });
 
+router.get("/edit-fish", (req,res) => {
+    res.render("edit-fish")
+});
+
 router.get("/product_list", productRender); // render product list
 
 router.get("/product_info", productInfoRender); // render product info
