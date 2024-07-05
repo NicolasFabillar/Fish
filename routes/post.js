@@ -11,6 +11,10 @@ router.get("/listing_form", (req,res) => {
     res.render("listingform")
 });
 
+router.get("/edit", (req,res) => {
+    res.render("edit")
+});
+
 router.get("/product_list", productRender); // render product list
 
 router.get("/product_info", productInfoRender); // render product info
