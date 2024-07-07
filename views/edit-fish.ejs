@@ -146,8 +146,7 @@
         .actions {
             display: flex;
             justify-content: flex-end;
-            margin-top: 20px;
-            margin-bottom: 20px; /* Add margin for separation */
+            margin-top: 250px;
             width: 100%;
         }
         .actions button {
@@ -214,6 +213,7 @@
             <a href="/edit" class="back-button">← Back to Edit Profile</a>
             <ul>
                 <li><a href="#" class="active">Edit Fish</a></li>
+                <li><a href="/listing_form">Add Fish</a></li>
             </ul>
         </div>
         <div class="main-content">
@@ -225,6 +225,24 @@
                         <input type="text" id="fishName" name="fishName" value="Goldfish">
                     </div>
                     <div class="form-group">
+                        <label for="description">Fish Description</label>
+                        <textarea id="description" name="description" rows="4">lorem ipsum.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="text" id="price" name="price" value="600"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category" required>
+                          <option value="">Select category...</option>
+                          <option value="freshwater">Freshwater</option>
+                          <option value="saltwater">Saltwater</option>
+                          <option value="pet">Pet</option>
+                          <!-- Add more options as needed -->
+                        </select>
+                      </div>
+                    <div class="form-group">
                         <label for="takingCareGuide">Taking Care Guide</label>
                         <textarea id="takingCareGuide" name="takingCareGuide" rows="6">Ensure the tank is clean and maintain proper temperature.</textarea>
                     </div>
@@ -232,7 +250,7 @@
                     <div class="right-column">
                         <div class="fish-image">
                             <img src="https://via.placeholder.com/300" alt="Fish Image" id="fishImagePreview">
-                            <label for="fishImage">Edit Fish Picture</label>
+                            <label for="fishImage">Select Fish Picture</label>
                             <input type="file" id="fishImage" name="fishImage" accept="image/*" onchange="previewImage(event)">
                         </div>
                         <div class="actions">
