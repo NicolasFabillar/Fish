@@ -53,52 +53,6 @@
       align-items: center;
     }
 
-    .product-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      width: 100%;
-      max-width: 1200px;
-      margin-bottom: 20px;
-    }
-
-    .product-box {
-      position: relative;
-      background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-    }
-
-    .product-box:hover {
-      transform: scale(1.05);
-      background-color: rgba(255, 255, 255, 1);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .product-box:hover .product-name {
-      color: black;
-    }
-
-    .product-image {
-      width: 225px;
-      height: 150px;
-      background-color: #ddd;
-      margin: 0 auto 10px;
-      border: 2px solid black;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .product-name {
-      font-size: 1.2rem;
-      color: white;
-      margin: 0;
-    }
-
     .seller-info {
       display: flex;
       align-items: center;
@@ -137,10 +91,20 @@
       color: white;
     }
 
-
-    .product-container a {
+    .edit-profile-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #F7931E;
+      color: rgb(0, 0, 0);
       text-decoration: none;
-      color: inherit;
+      border-radius: 5px;
+      margin: 20px;
+      border: 1px solid #000000;
+    }
+
+    .edit-profile-button:hover {
+      background-color: transparent;
+      color: #4CAF50;
     }
   </style>
 </head>
@@ -186,35 +150,19 @@
 
   <!-- seller info section -->
   <section class="seller-info">
-    <img src="https://via.placeholder.com/100" alt="Seller Icon" class="seller-icon">
+    <img src="https://via.placeholder.com/200" alt="Seller Icon" class="seller-icon">
     <div class="seller-details">
-      <h2><%= sellerData.fullName %></h2>
-      <p id="store-name"><i class="fas fa-store icon"></i><strong>Store Name:</strong> Store</p>
+      <h2>John Doe</h2>
+      <p id="store-name"><i class="fas fa-store icon"></i><strong>Store Name:</strong> Fishy Delights</p>
       <p id="store-ratings"><i class="fas fa-star icon"></i><strong>Ratings:</strong> 4.5/5</p>
-      <p id="store-location"><i class="fas fa-map-marker-alt icon"></i><strong>Location:</strong> <%= sellerData.city %></p>
-      <p id="store-contact"><i class="fas fa-phone icon"></i><strong>Contact Info:</strong> <%= sellerData.contact %></p>
-      <p id="store-email"><i class="fas fa-envelope icon"></i><strong>Email Address:</strong> <%= sellerData.email %></p>
+      <p id="store-location"><i class="fas fa-map-marker-alt icon"></i><strong>Location:</strong> 123 Ocean Drive, Seaside Town</p>
+      <p id="store-contact"><i class="fas fa-phone icon"></i><strong>Contact Info:</strong> 1234567890</p>
+      <p id="store-email"><i class="fas fa-envelope icon"></i><strong>Email Address:</strong> storename@example.com</p>
+      <a href="/edit" class="edit-profile-button">Edit Profile</a>
     </div>
   </section>
   <!-- end seller info section -->
 
-  <!-- back-button -->
-  <a href="/sellers" class="back-button">Back to Sellers List</a>
-
-  <!-- product list section -->
-  <main>
-    <div class="product-container" id="productContainer">
-      <!-- Dynamic product boxes -->
-      <% allFishListings.fishData.forEach(function(fishData) { %>
-      <div class="product-box">
-        <a href="/product_info?id=<%= fishData.id %>" class="card-link"></a>
-        <div class="product-image" style="background-image: url('/fish_uploads/<%= fishData.img %>');"></div>
-        <p class="product-name"><%= fishData.fish_name %></p>
-      </div>
-      <% }); %>
-    </div>
-  </main>
-  <!-- end product list section -->
 
   <!-- info section -->
   <section class="info_section">
@@ -291,23 +239,6 @@
   </section>
   <!-- footer section -->
 
-  <script>
-    // JavaScript for product box click
-    document.addEventListener('DOMContentLoaded', function () {
-      const productBoxes = document.querySelectorAll('.product-box');
-      productBoxes.forEach(box => {
-        box.addEventListener('click', function () {
-          const link = this.querySelector('.card-link');
-          if (link) {
-            window.location.href = link.href;
-          }
-        });
-      });
-    });
-  </script>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script>
     // Function to toggle the navigation menu
     function openNav() {

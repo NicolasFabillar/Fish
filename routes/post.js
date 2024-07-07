@@ -19,6 +19,10 @@ router.get("/edit-fish", (req,res) => {
     res.render("edit-fish")
 });
 
+router.get("/profilepage", (req,res) => {
+    res.render("profilepage")
+});
+
 router.get("/product_list", productRender); // render product list
 
 router.get("/product_info", productInfoRender); // render product info
