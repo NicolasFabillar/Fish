@@ -266,7 +266,7 @@
                         </div>
                         <div class="actions">
                             <button type="submit" class="save">Save Changes</button>
-                            <button type="button" class="cancel">Cancel</button>
+                            <button type="button" class="cancel" id="cancelButton">Cancel</button>
                         </div>
                     </div>
             </form>
@@ -297,16 +297,20 @@
                 icon.classList.add("bi-eye");
             }
         }
+
+        document.getElementById("cancelButton").addEventListener("click", function() {
+            window.location.href = "/profilepage";
+        });
     </script>
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-      <script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
         // Function to toggle the navigation menu
         function openNav() {
-          document.getElementById("myNav").classList.toggle("menu_width");
-          document.querySelector(".custom_menu-btn").classList.toggle("menu_btn-style");
+            document.getElementById("myNav").classList.toggle("menu_width");
+            document.querySelector(".custom_menu-btn").classList.toggle("menu_btn-style");
         }
-      </script>
+    </script>
 </body>
 </html>
