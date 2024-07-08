@@ -14,7 +14,7 @@
   <title>Fish Finder</title>
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Poppins:400,700&display=swap" rel="stylesheet">
@@ -25,15 +25,27 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
       margin: 0;
       padding: 0;
+      background-color: #000000;
+      background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
+      color: rgb(0, 0, 0);
     }
 
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
+    header {
+      text-align: center;
+      padding: 15px;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .container2 {
+      max-width: 700px;
+      margin: 15px auto;
       background-color: #f0f0f0;
       padding: 20px;
       border-radius: 8px;
@@ -46,6 +58,13 @@
 
     .form-group {
       margin-bottom: 20px;
+    }
+
+    main {
+      padding: 20px;
+      margin-top: 0px;
+      flex-direction: column;
+      align-items: center;
     }
 
     label {
@@ -65,6 +84,60 @@
       box-sizing: border-box;
     }
 
+    .container3 {
+      display: flex;
+      margin: 0;
+    }
+
+    .sidebar {
+      width: 250px;
+      padding: 20px;
+      height: 100vh;
+      position: fixed;
+      overflow-y: auto; /* Allow sidebar to scroll */
+      padding-left: 30px;
+    }
+
+    .sidebar h2 {
+      color: white;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin: 20px 0;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .sidebar ul li a.active, .sidebar ul li a:hover {
+      background-color: #FF8C42;
+    }
+
+    .back-button {
+      display: block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+    }
+
+    .back-button:hover {
+      color: #FF8C42;
+    }
+
     textarea {
       resize: vertical;
     }
@@ -81,40 +154,117 @@
       border: 1px solid #F7931E;
     }
 
+    .main-content {
+      margin-left: 250px; /* Adjust this value if needed */
+      border-left: 2px solid #FF8C42; /* Add this line for the left border */
+    }
+
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1>Listing Form</h1>
-    <form action="/auth/api/listfish" method="POST" enctype="multipart/form-data"> <!-- Added enctype attribute -->
-      <div class="form-group">
-        <label for="title">Fish Name:</label>
-        <input type="text" id="title" name="fish_name" required>
+<body class="sub_page">
+  <div class="hero_area">
+    <!-- header section starts -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="/">
+            <img src="/images/logo1.png" alt="Logo">
+          </a>
+          <div class="" id="">
+            <div class="User_option">
+              <form class="form-inline my-2 mb-3 mb-lg-0">
+                <input type="search" placeholder="Search">
+                <button class="btn my-sm-0 nav_search-btn" type="submit"></button>
+              </form>
+            </div>
+            <div class="custom_menu-btn">
+              <button onclick="openNav()">
+                <span class="s-1"></span>
+                <span class="s-2"></span>
+                <span class="s-3"></span>
+              </button>
+            </div>
+            <div id="myNav" class="overlay">
+              <div class="overlay-content">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/product_list">Products</a>
+                <a href="/sellers">Sellers</a>
+                <a href="/contact">Contact Us</a>
+              </div>
+            </div>
+          </div>
+        </nav>
       </div>
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="4" required></textarea>
+    </header>
+    <!-- end header section -->
+    <div class="container3">
+      <div class="sidebar">
+        <a href="/edit" class="back-button">← Back to Edit Profile</a>
+        <ul>
+          <li><a href="#" class="active">Add Fish</a></li>
+          <li><a href="edit-fish">Edit Fish</a></li>
+        </ul>
       </div>
-      <div class="form-group">
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" required>
+    </div>
+    <main class="main-content">
+      <div class="container2">
+        <h1>Listing Form</h1>
+        <form action="/auth/api/listfish" method="POST" enctype="multipart/form-data"> <!-- Added enctype attribute -->
+          <div class="form-group">
+            <label for="title">Fish Name:</label>
+            <input type="text" id="title" name="fish_name" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
+          </div>
+          <div class="form-group">
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+              <option value="">Select category...</option>
+              <option value="freshwater">Freshwater</option>
+              <option value="saltwater">Saltwater</option>
+              <option value="pet">Pet</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="takingCareGuide">Taking Care Guide</label>
+            <textarea id="takingCareGuide" name="takingCareGuide" rows="6">Ensure the tank is clean and maintain proper temperature.</textarea>
+          </div>
+          <div class="form-group">
+            <label for="photo">Photo:</label>
+            <input type="file" id="photo" name="fishPhoto" accept="image/*" required>
+          </div>
+          <button type="submit">Submit Listing</button>
+        </form>
       </div>
-      <div class="form-group">
-        <label for="category">Category:</label>
-        <select id="category" name="category" required>
-          <option value="">Select category...</option>
-          <option value="freshwater">Freshwater</option>
-          <option value="saltwater">Saltwater</option>
-          <option value="pet">Pet</option>
-          <!-- Add more options as needed -->
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="photo">Photo:</label>
-        <input type="file" id="photo" name="fishPhoto" accept="image/*" required>
-      </div>
-      <button type="submit">Submit Listing</button>
-    </form>
+    </main>
   </div>
+
+  <section class="container-fluid footer_section">
+    <p>
+      &copy; 2019 All Rights Reserved. Design by
+      <a href="https://html.design/">Free Html Templates</a>
+    </p>
+  </section>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
+    function openNav() {
+      document.getElementById("myNav").style.width = "100%";
+    }
+
+    function closeNav() {
+      document.getElementById("myNav").style.width = "0%";
+    }
+  </script>
 </body>
 </html>
