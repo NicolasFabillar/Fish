@@ -12,7 +12,12 @@ router.get("/", (req, res) => {
 });
 
 router.get("/listing_form", (req,res) => {
-    res.render("listingform")
+    const isLoggedIn = req.session?.isLoggedin;
+    if (isLoggedIn == true){
+        res.render("listingform")
+    } else {
+        res.redirect("/login")
+    }
 });
 
 router.get("/edit", (req,res) => {
