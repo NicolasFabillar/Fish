@@ -17,7 +17,7 @@ const capitalize = (str) => {
 };
 
 exports.login = (req,res) => {
-    const {email, password} = req.body;
+    const {email, password, fishID, sellerPage} = req.body;
 
     db.query(`SELECT * FROM users WHERE email = "${email}"`, async (error, results, fields) => {
 
@@ -33,7 +33,14 @@ exports.login = (req,res) => {
             req.session.userEmail = email;
             req.session.userID = results[0].id;
             req.session.isLoggedin = true;
-            res.redirect('/');
+
+            if (fishID) {
+                res.redirect(`/product_info?id=${fishID}`);
+            } else if (sellerPage) {
+                res.redirect(`/sellers`);
+            } else {
+                res.redirect('/');
+            }
         }
         if (results[0].password != password) {
             return res.render('login', {
@@ -186,12 +193,13 @@ exports.productInfoRender = (req, res) => {
             });
         });
     } else {
-        res.render('login')
+        res.render('login', {fishID})
     }
 };
 
 exports.sellersRender = (req, res) => {
     const LoginStatus = req.session.isLoggedin;
+    const sellerPage = true;
 
     if (LoginStatus == true){ 
         db.query('SELECT * FROM users WHERE is_Seller = ?',[1], (error, results) => {
@@ -210,7 +218,7 @@ exports.sellersRender = (req, res) => {
             res.render('sellers', { allSellers });
         });
     } else {
-        res.render('login')
+        res.render('login', {sellerPage})
     }
 };
 
