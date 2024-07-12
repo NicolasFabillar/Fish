@@ -814,10 +814,6 @@ a:focus {
   margin-left: 5px;
 }
 
-.client_section {
-  background-image: url(../images/client-bg.jpg);
-  background-size: cover;
-}
 
 .client_section #carouselExampleControls {
   display: -webkit-box;
@@ -965,12 +961,20 @@ a:focus {
   background-color: #0a2050;
   color: #ffffff;
   padding: 40px 0 75px 0;
-  font-family: "Open Sans",
- sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
-.info_section .row > div {
-  margin-top: 35px;
+.info_section .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.info_section .col-md-6, .info_section .col-lg-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px; /* Adjust as needed */
 }
 
 .info_section h5 {
@@ -1003,7 +1007,6 @@ a:focus {
   padding: 4px 45px;
   background-color: #993928;
   color: #0a2050;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: 1px solid #993928;
   border-radius: 0;
@@ -1015,9 +1018,8 @@ a:focus {
 }
 
 .info_social .social_container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
+  justify-content: center;
 }
 
 .info_social .social_container a {
@@ -1029,12 +1031,8 @@ a:focus {
 }
 
 .info_contact > div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   margin: 10px 0;
 }
 
@@ -1046,6 +1044,7 @@ a:focus {
 .info_contact > div p {
   margin: 0;
 }
+
 
 /* footer section*/
 .footer_section {
