@@ -3,8 +3,12 @@ const router = express.Router();
 
 const {productRender, userRender, editUserRender, logout, productInfoRender, sellersRender, sellerInfoRender} = require("../controllers/auth")
 
-router.get("/", (req,res) => {
-    res.render("index")
+router.get("/", (req, res) => {
+    const isLoggedIn = req.session?.isLoggedin;
+    const userData = {
+        loginStatus: isLoggedIn,
+    };
+    res.render("index", {userData});
 });
 
 router.get("/listing_form", (req,res) => {

@@ -17,7 +17,6 @@ const capitalize = (str) => {
 };
 
 exports.login = (req,res) => {
-    console.log(req.body);
     const {email, password} = req.body;
 
     db.query(`SELECT * FROM users WHERE email = "${email}"`, async (error, results, fields) => {
@@ -32,8 +31,9 @@ exports.login = (req,res) => {
         }
         if (results[0].password == password) {
             req.session.userEmail = email;
-            req.session.userID = results[0].id
-            res.redirect('/')
+            req.session.userID = results[0].id;
+            req.session.isLoggedin = true;
+            res.redirect('/');
         }
         if (results[0].password != password) {
             return res.render('login', {
@@ -73,7 +73,6 @@ exports.register = (req,res) => {
 }
 
 exports.listFish = (req, res) => {
-
     const userID = req.session.userID;
     const { fish_name, description, price, category } = req.body;
     const fishPhoto = req.file;
@@ -146,62 +145,73 @@ exports.productRender = (req, res) => {
 };
 
 exports.productInfoRender = (req, res) => {
-    const fishID = req.query.id
+    const fishID = req.query.id;
+    const LoginStatus = req.session.isLoggedin;
 
-    db.query('SELECT * FROM fish_listings WHERE id = ?', [fishID], (error, results) => {
-        if (error) {
-            console.log("error: ", error);
-            return res.status(500).send('Internal Server Error');
-        }
-    
-        if (results.length === 0) {
-            return res.status(404).send('Fish not found');
-        }
-    
-        const fishData = {
-            id: results[0].id,  
-            seller: results[0].sellerID,  
-            fish_name: capitalize(results[0].fish_name),
-            description: results[0].description,
-            price: results[0].price,
-            img: results[0].fish_img,
-        };
-
-        db.query('SELECT * FROM users WHERE id = ?', [fishData.seller], (error, results) => {
+    if (LoginStatus == true){
+        db.query('SELECT * FROM fish_listings WHERE id = ?', [fishID], (error, results) => {
             if (error) {
-                console.log("Error fetching fish listings: ", error);
+                console.log("error: ", error);
                 return res.status(500).send('Internal Server Error');
             }
-
-            const sellerData = {
-                id: results[0].id,
-                fullName: capitalize(results[0].first_name) + " " + capitalize(results[0].last_name),
-                contact: results[0].contact_number,
-                email: results[0].email,
-                city: results[0].city,
+        
+            if (results.length === 0) {
+                return res.status(404).send('Fish not found');
+            }
+        
+            const fishData = {
+                id: results[0].id,  
+                seller: results[0].sellerID,  
+                fish_name: capitalize(results[0].fish_name),
+                description: results[0].description,
+                price: results[0].price,
+                img: results[0].fish_img,
             };
-
-            res.render('product-info', { fishData, sellerData });
+    
+            db.query('SELECT * FROM users WHERE id = ?', [fishData.seller], (error, results) => {
+                if (error) {
+                    console.log("Error fetching fish listings: ", error);
+                    return res.status(500).send('Internal Server Error');
+                }
+    
+                const sellerData = {
+                    id: results[0].id,
+                    fullName: capitalize(results[0].first_name) + " " + capitalize(results[0].last_name),
+                    contact: results[0].contact_number,
+                    email: results[0].email,
+                    city: results[0].city,
+                };
+    
+                res.render('product-info', { fishData, sellerData });
+            });
         });
-    });
+    } else {
+        res.render('login')
+    }
 };
 
 exports.sellersRender = (req, res) => {
-    db.query('SELECT * FROM users WHERE is_Seller = ?',[1], (error, results) => {
-        if (error) {
-            console.log("error: ", error);
-            return res.status(500).send('Internal Server Error');
-        }
+    const LoginStatus = req.session.isLoggedin;
 
-        const allSellers = {
-            Seller: results.map((row, index) => ({
-                id: row.id, 
-                fullName: capitalize(row.first_name) + " " + capitalize(row.last_name),
-            }))
-        };
-
-        res.render('sellers', { allSellers });
-    });
+    if (LoginStatus == true){ 
+        db.query('SELECT * FROM users WHERE is_Seller = ?',[1], (error, results) => {
+            if (error) {
+                console.log("error: ", error);
+                return res.status(500).send('Internal Server Error');
+            }
+    
+            const allSellers = {
+                Seller: results.map((row, index) => ({
+                    id: row.id, 
+                    fullName: capitalize(row.first_name) + " " + capitalize(row.last_name),
+                }))
+            };
+    
+            res.render('sellers', { allSellers });
+        });
+    } else {
+        res.render('login')
+    }
 };
 
 exports.sellerInfoRender = (req, res) => {

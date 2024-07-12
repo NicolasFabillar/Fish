@@ -95,14 +95,16 @@
                       <span style="color: #f4f4f4; text-shadow: .5px .5px .5px #341a0f;">Easily find and connect with trusted sellers, ensuring a seamless and enjoyable shopping experience.
                         Dive into our user-friendly interface and explore a wide selection of fish. At FishFinder, we bring the best of the ocean to your doorstep!!</span>
                     </p>
-                    <div class="btn-box">
-                      <a href="/login" class="btn-1">
-                        Login
-                      </a>
-                      <a href="/signup" class="btn-2">
-                        Register
-                      </a>
-                    </div>
+                    <% if (!userData.loginStatus) { console.log(userData)%> 
+                      <div class="btn-box">
+                        <a href="/login" class="btn-1">
+                          Login
+                        </a>
+                        <a href="/register" class="btn-2">
+                          Register
+                        </a>
+                      </div>
+                    <% } %>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -129,14 +131,7 @@
                       <span style="color: #f4f4f4; text-shadow: .5px .5px .5px #341a0f;">Easily find and connect with trusted sellers, ensuring a seamless and enjoyable shopping experience.
                         Dive into our user-friendly interface and explore a wide selection of fish. At FishFinder, we bring the best of the ocean to your doorstep!!</span>
                     </p>
-                    <div class="btn-box">
-                      <a href="/login" class="btn-1">
-                        Login
-                      </a>
-                      <a href="" class="btn-2">
-                        Register
-                      </a>
-                    </div>
+                    
                   </div>
                 </div>
                 <div class="col-md-6">
