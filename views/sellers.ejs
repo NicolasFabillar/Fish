@@ -101,7 +101,9 @@
     .profile-container {
       display: flex;
       align-items: center;
-      margin-right: 180px;
+      position: relative; /* Necessary for positioning the dropdown */
+      margin-top: 20px;
+      margin-right: 190px;
       margin-bottom: 40px;
     }
 
@@ -114,6 +116,30 @@
       width: 80px;
       height: 80px;
       border-radius: 50%;
+    }
+
+    .dropdown-menu {
+      display: none; /* Hide dropdown by default */
+      position: absolute; /* Position dropdown menu */
+      top: 100%; /* Position below profile icon */
+      right: 0; /* Align to right of profile icon */
+      background-color: #ffffff; /* Background color of dropdown */
+      border: 1px solid #ccc; /* Border for dropdown */
+      border-radius: 4px; /* Rounded corners */
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
+      z-index: 1000; /* Ensure dropdown is above other elements */
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 10px 20px; /* Space around text */
+      text-decoration: none; /* Remove underline */
+      color: #0a2050; /* Text color */
+      font-family: "Open Sans", sans-serif; /* Match font */
+    }
+
+    .dropdown-item:hover {
+      background-color: #f0f0f0; /* Hover background color */
     }
   </style>
 </head>
@@ -137,6 +163,10 @@
               <a href="/profilepage" class="profile-link">
                 <img src="/images/icon2.png" alt="Profile Icon" class="profile-icon">
               </a>
+              <div class="dropdown-menu">
+                <a href="/profilepage" class="dropdown-item">Profile</a>
+                <a href="/logout" class="dropdown-item">Log Out</a>
+              </div>
             </div>
             <div class="custom_menu-btn">
               <button onclick="openNav()">
@@ -244,6 +274,23 @@
       document.getElementById("myNav").classList.toggle("menu_width");
       document.querySelector(".custom_menu-btn").classList.toggle("menu_btn-style");
     }
+        // Dropdown menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+      var profileLink = document.querySelector('.profile-link');
+      var dropdownMenu = document.querySelector('.dropdown-menu');
+
+      profileLink.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!profileLink.contains(event.target) && !dropdownMenu.contains(event.target)) {
+          dropdownMenu.style.display = 'none';
+        }
+      });
+    });
   </script>
 </body>
 

@@ -32,6 +32,10 @@ router.get("/profilepage", (req,res) => {
     res.render("profilepage")
 });
 
+router.get("/contact", (req,res) => {
+    res.render("contact")
+});
+
 router.get("/product_list", productRender); // render product list
 
 router.get("/product_info", productInfoRender); // render product info
