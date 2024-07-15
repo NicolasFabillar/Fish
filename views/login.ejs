@@ -9,22 +9,17 @@
    </head>
    <body>
       <div class="wrapper">
-         <div class="title-text">
-            <div class="title login">
-               Login Form
-            </div>
-            <div class="title signup">
-               Signup Form
-            </div>
-         </div>
+         <div class="title-text" style="margin-left: 85px;">
+            <img src="/images/logo1.png" alt="" style="width: 200px;">
+        </div>        
          <div class="form-container">
-            <div class="slide-controls">
+            <!-- <div class="slide-controls">
                <input type="radio" name="slide" id="login" checked>
                <input type="radio" name="slide" id="signup">
                <label for="login" class="slide login">User</label>
                <label for="signup" class="slide signup">Admin</label>
                <div class="slider-tab"></div>
-            </div>
+            </div> -->
             <div class="form-inner">
                <form action = "/auth/api/login/" method = "POST" class="login">
                   <input type="hidden" name="fishID" value="<%= typeof fishID !== 'undefined' ? fishID : '' %>">
@@ -43,7 +38,7 @@
                      <input type="submit" value="Login">
                   </div>
                   <div class="signup-link">
-                     Not a member? <a href="">Signup now</a>
+                     Not a member? <a href="/signup">Signup now</a>
                   </div>
                </form>
 
@@ -71,7 +66,7 @@
          const loginForm = document.querySelector("form.login");
          const loginBtn = document.querySelector("label.login");
          const signupBtn = document.querySelector("label.signup");
-         const signupLink = document.querySelector("form .signup-link a");
+         // const signupLink = document.querySelector("form .signup-link a");
          signupBtn.onclick = (()=>{
            loginForm.style.marginLeft = "-50%";
            loginText.style.marginLeft = "-50%";
