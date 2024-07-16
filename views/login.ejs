@@ -13,7 +13,7 @@
       </div>
     </div>
 
-    <!-- The Modal -->
+    <!-- Reminder Popup Modal -->
     <div id="myPopup" class="popup">
       <div class="popup-content">
         <div class="icon">
@@ -28,13 +28,29 @@
       </div>
     </div>
 
+    <!-- Error Popup Modal -->
+    <div id="errorPopup" class="error-popup">
+      <div class="popup-content">
+        <div class="icon">
+          <span class="close" onclick="closeErrorPopup()">&times;</span>
+        </div>
+        <h1>Error!</h1>
+        <p>Incorrect email or password. Please try again.</p>
+      </div>
+    </div>
+
     <div class="wrapper">
       <div class="title-text" style="margin-left: 85px">
         <img src="/images/logo1.png" alt="" style="width: 200px" />
       </div>
       <div class="form-container">
         <div class="form-inner">
-          <form action="/auth/api/login/" method="POST" class="login">
+          <form
+            action="/auth/api/login/"
+            method="POST"
+            class="login"
+            id="loginForm"
+          >
             <input
               type="hidden"
               name="fishID"
@@ -94,33 +110,52 @@
         </div>
       </div>
     </div>
+
     <script>
       // JavaScript for Popup functionality
-      // Get the popup
       var popup = document.getElementById("myPopup");
-
-      // Get the button that opens the popup
       var btn = document.getElementById("popupBtn");
-
-      // Get the <span> element that closes the popup
       var span = document.getElementsByClassName("close")[0];
 
-      // When the user clicks the button, open the popup
       btn.onclick = function () {
         popup.style.display = "block";
       };
 
-      // When the user clicks on <span> (x), close the popup
       span.onclick = function () {
         popup.style.display = "none";
       };
 
-      // When the user clicks anywhere outside of the popup, close it
       window.onclick = function (event) {
         if (event.target == popup) {
           popup.style.display = "none";
         }
       };
+
+      // Error Popup
+      var errorPopup = document.getElementById("errorPopup");
+
+      // Show error popup function
+      function showErrorPopup() {
+        errorPopup.style.display = "block";
+      }
+
+      // Close error popup function
+      function closeErrorPopup() {
+        errorPopup.style.display = "none";
+      }
+
+      // Example: Check login validation
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          // Replace this with actual validation logic
+          var isValid = false; // Example: Assume login is invalid
+
+          if (!isValid) {
+            showErrorPopup();
+            event.preventDefault(); // Prevent form submission
+          }
+        });
     </script>
   </body>
 </html>
