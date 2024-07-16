@@ -1,84 +1,126 @@
 <!DOCTYPE html>
-<!-- Created By CodingNepal -->
 <html lang="en" dir="ltr">
-   <head>
-      <meta charset="utf-8">
-      <title>Login and Registration Form in HTML</title>
-      <link rel="stylesheet" href="/css/login.css">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
-   <body>
-      <div class="wrapper">
-         <div class="title-text" style="margin-left: 85px;">
-            <img src="/images/logo1.png" alt="" style="width: 200px;">
-        </div>        
-         <div class="form-container">
-            <!-- <div class="slide-controls">
-               <input type="radio" name="slide" id="login" checked>
-               <input type="radio" name="slide" id="signup">
-               <label for="login" class="slide login">User</label>
-               <label for="signup" class="slide signup">Admin</label>
-               <div class="slider-tab"></div>
-            </div> -->
-            <div class="form-inner">
-               <form action = "/auth/api/login/" method = "POST" class="login">
-                  <input type="hidden" name="fishID" value="<%= typeof fishID !== 'undefined' ? fishID : '' %>">
-                  <input type="hidden" name="sellerPage" value="<%= typeof sellerPage !== 'undefined' ? sellerPage : '' %>">
-                  <div class="field">
-                     <input type="text" placeholder="Email Address" id="email" name = "email" required>
-                  </div>
-                  <div class="field">
-                     <input type="password" placeholder="Password" id="password" name = "password" required>
-                  </div>
-                  <div class="pass-link">
-                     <a href="#">Forgot password?</a>
-                  </div>
-                  <div class="field btn">
-                     <div class="btn-layer"></div>
-                     <input type="submit" value="Login">
-                  </div>
-                  <div class="signup-link">
-                     Not a member? <a href="/signup">Signup now</a>
-                  </div>
-               </form>
-
-               <form action="#" class="login">
-                    <div class="field">
-                       <input type="text" placeholder="Email Address" required>
-                    </div>
-                    <div class="field">
-                       <input type="password" placeholder="Password" required>
-                    </div>
-                    <div class="pass-link">
-                       <a href="#">Forgot password?</a>
-                    </div>
-                    <div class="field btn">
-                       <div class="btn-layer"></div>
-                       <input type="submit" value="Login">
-                    </div>
-                  </div>
-               </form>
-            </div>
-         </div>
+  <head>
+    <meta charset="utf-8" />
+    <title>Login and Registration Form in HTML</title>
+    <link rel="stylesheet" href="/css/login.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="temporary-container">
+      <div class="temporary-btn">
+        <button id="popupBtn">pop-up</button>
       </div>
-      <script>
-         const loginText = document.querySelector(".title-text .login");
-         const loginForm = document.querySelector("form.login");
-         const loginBtn = document.querySelector("label.login");
-         const signupBtn = document.querySelector("label.signup");
-         // const signupLink = document.querySelector("form .signup-link a");
-         signupBtn.onclick = (()=>{
-           loginForm.style.marginLeft = "-50%";
-           loginText.style.marginLeft = "-50%";
-         });
-         loginBtn.onclick = (()=>{
-           loginForm.style.marginLeft = "0%";
-           loginText.style.marginLeft = "0%";
-         });
-         signupLink.onclick = (()=>{
-           signupBtn.click();
-           return false;
-         });
-      </script>
-   </body>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myPopup" class="popup">
+      <div class="popup-content">
+        <div class="icon">
+          <span class="close">&times;</span>
+        </div>
+        <h1>Reminder!</h1>
+        <p>
+          To access this feature, you must sign in first. Please log in to your
+          account to continue. If you don't have an account, you can sign up
+          easily by following the registration process.
+        </p>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="title-text" style="margin-left: 85px">
+        <img src="/images/logo1.png" alt="" style="width: 200px" />
+      </div>
+      <div class="form-container">
+        <div class="form-inner">
+          <form action="/auth/api/login/" method="POST" class="login">
+            <input
+              type="hidden"
+              name="fishID"
+              value="<%= typeof fishID !== 'undefined' ? fishID : '' %>"
+            />
+            <input
+              type="hidden"
+              name="sellerPage"
+              value="<%= typeof sellerPage !== 'undefined' ? sellerPage : '' %>"
+            />
+            <div class="field">
+              <input
+                type="text"
+                placeholder="Email Address"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                placeholder="Password"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <div class="pass-link">
+              <a href="#">Forgot password?</a>
+            </div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Login" />
+            </div>
+            <div class="signup-link">
+              Not a member? <a href="/signup">Signup now</a>
+            </div>
+          </form>
+
+          <!-- Ensure this form is intended -->
+          <form action="#" class="login">
+            <div class="field">
+              <input type="text" placeholder="Email Address" required />
+            </div>
+            <div class="field">
+              <input type="password" placeholder="Password" required />
+            </div>
+            <div class="pass-link">
+              <a href="#">Forgot password?</a>
+            </div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Login" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      // JavaScript for Popup functionality
+      // Get the popup
+      var popup = document.getElementById("myPopup");
+
+      // Get the button that opens the popup
+      var btn = document.getElementById("popupBtn");
+
+      // Get the <span> element that closes the popup
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks the button, open the popup
+      btn.onclick = function () {
+        popup.style.display = "block";
+      };
+
+      // When the user clicks on <span> (x), close the popup
+      span.onclick = function () {
+        popup.style.display = "none";
+      };
+
+      // When the user clicks anywhere outside of the popup, close it
+      window.onclick = function (event) {
+        if (event.target == popup) {
+          popup.style.display = "none";
+        }
+      };
+    </script>
+  </body>
 </html>

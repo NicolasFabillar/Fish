@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
-html, body {
+html,
+body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +15,7 @@ html, body {
   background: url(../images/loginbg.png) no-repeat center center/cover;
 }
 ::selection {
-  background: #F87636;
+  background: #f87636;
   color: #fff;
 }
 .wrapper {
@@ -46,7 +47,7 @@ html, body {
   overflow: hidden;
   margin: 30px 0 10px 0;
   justify-content: space-between;
-  border: 1px solid #DBDFDB;
+  border: 1px solid #dbdfdb;
   border-radius: 5px;
 }
 .slide-controls .slide {
@@ -62,7 +63,7 @@ html, body {
   transition: all 0.6s ease;
 }
 .slide-controls label.signup {
-  color: #298A91;
+  color: #298a91;
 }
 .slide-controls .slider-tab {
   position: absolute;
@@ -71,7 +72,7 @@ html, body {
   left: 0;
   z-index: 0;
   border-radius: 5px;
-  background: -webkit-linear-gradient(left, #F87636, #298A91);
+  background: -webkit-linear-gradient(left, #f87636, #298a91);
   transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 input[type="radio"] {
@@ -86,10 +87,10 @@ input[type="radio"] {
   user-select: none;
 }
 #signup:checked ~ label.login {
-  color: #298A91;
+  color: #298a91;
 }
 #login:checked ~ label.signup {
-  color: #298A91;
+  color: #298a91;
 }
 #login:checked ~ label.login {
   cursor: default;
@@ -118,13 +119,13 @@ input[type="radio"] {
   outline: none;
   padding-left: 15px;
   border-radius: 5px;
-  border: 1px solid #DBDFDB;
+  border: 1px solid #dbdfdb;
   border-bottom-width: 2px;
   font-size: 17px;
   transition: all 0.3s ease;
 }
 .form-inner form .field input:focus {
-  border-color: #90C6CC;
+  border-color: #90c6cc;
 }
 .form-inner form .field input::placeholder {
   color: #999;
@@ -142,7 +143,7 @@ form .field input:focus::placeholder {
 }
 .form-inner form .pass-link a,
 .form-inner form .signup-link a {
-  color: #F87636;
+  color: #f87636;
   text-decoration: none;
 }
 .form-inner form .pass-link a:hover,
@@ -161,7 +162,13 @@ form .btn .btn-layer {
   width: 300%;
   position: absolute;
   left: -100%;
-  background: -webkit-linear-gradient(right, #F87636, #298A91, #F87636, #298A91);
+  background: -webkit-linear-gradient(
+    right,
+    #f87636,
+    #298a91,
+    #f87636,
+    #298a91
+  );
   border-radius: 5px;
   transition: all 0.4s ease;
 }
@@ -232,3 +239,61 @@ form .btn input[type="submit"] {
     font-size: 18px;
   }
 }
+
+/* Additional CSS */
+/* by eco */
+.temporary-container {
+  position: relative;
+}
+
+.temporary-btn {
+  top: 0;
+  left: 0;
+  display: flex;
+}
+
+/* Popup container*/
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Popup content */
+.popup-content {
+  background-color: #fefefe;
+  margin: 20rem 0 0 5rem;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40rem;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  position: relative;
+}
+
+/* Close button */
+.close {
+  color: #aaa;
+  position: absolute;
+  top: 10px; 
+  right: 20px; 
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: rgb(255, 0, 0);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ------------- */
