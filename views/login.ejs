@@ -7,11 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <div class="temporary-container">
-      <div class="temporary-btn">
-        <button id="popupBtn">pop-up</button>
-      </div>
-    </div>
 
     <!-- Reminder Popup Modal -->
     <div id="myPopup" class="popup">
@@ -117,10 +112,6 @@
       var btn = document.getElementById("popupBtn");
       var span = document.getElementsByClassName("close")[0];
 
-      btn.onclick = function () {
-        popup.style.display = "block";
-      };
-
       span.onclick = function () {
         popup.style.display = "none";
       };
@@ -145,16 +136,15 @@
       }
 
       // Example: Check login validation
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
-          // Replace this with actual validation logic
-          var isValid = false; // Example: Assume login is invalid
-
-          if (!isValid) {
-            showErrorPopup();
-            event.preventDefault(); // Prevent form submission
-          }
+      document.addEventListener('DOMContentLoaded', (event) => {
+            const message = '<%= message %>';
+            if (message === 'Wrong Password') {
+                showErrorPopup();
+                event.preventDefault(); // Prevent form submission if necessary
+            }
+            if (message === 'Login First') {
+                popup.style.display = "block";
+            }
         });
     </script>
   </body>

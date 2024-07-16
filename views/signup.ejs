@@ -24,66 +24,69 @@
                <div class="slider-tab"></div>
             </div>
             <div class="form-inner">
-               <form action = "/auth/api/register" method = "POST" class="login">
-               <input type="hidden" name="userType" value=1>
-                <div class="field">
-                  <input type="Name" placeholder="Seller's Name" id="fname" name = "fname" required>
-               </div>
-               <div class="field">
-                <input type="Name" placeholder="Store's Name" id="lname" name = "lname"required>
-              </div>
-                <div class="field">
-                    <input type="Location" placeholder="City" id="city" name = "city" required>
-                </div>
-                <div class="field">
-                    <input type="Contact" placeholder="Contact Number" id="contact" name = "contact" required>
-                 </div>
+               <form action="/auth/api/register" method="POST" class="login" enctype="multipart/form-data">
+                  <input type="hidden" name="userType" value="1">
                   <div class="field">
-                     <input type="text" placeholder="Email Address" id="email" name = "email" required>
+                      <input type="text" placeholder="First Name" id="fname" name="fname" required>
                   </div>
                   <div class="field">
-                     <input type="password" placeholder="Password" id="password" name = "password" required>
+                      <input type="text" placeholder="Last Name" id="lname" name="lname" required>
+                  </div>
+                  <div class="field">
+                      <input type="text" placeholder="City" id="city" name="city" required>
+                  </div>
+                  <div class="field">
+                      <input type="text" placeholder="Contact Number" id="contact" name="contact" required>
+                  </div>
+                  <div class="field">
+                      <input type="email" placeholder="Email Address" id="email" name="email" required>
+                  </div>
+                  <div class="field">
+                      <input type="password" placeholder="Password" id="password" name="password" required>
+                  </div>
+                  <div class="field">
+                      <input type="text" placeholder="Store's Name" id="storeName" name="storeName" required>
                   </div>
                   <div class="store-img">
-                     <label for="storeImage">Upload Store Image:</label>
-                     <input type="file" id="storeImage" name="storeImage">
-                 </div>
-                  <div class="field btn">
-                     <div class="btn-layer"></div>
-                     <input type="submit" value="Signup">
+                      <label for="profileImage">Upload Store Image:</label>
+                      <input type="file" id="Image" name="Image" accept="image/*">
                   </div>
-               </form>
+                  <div class="field btn">
+                      <div class="btn-layer"></div>
+                      <input type="submit" value="Signup">
+                  </div>
+              </form>
 
-               <form action = "/auth/api/register" method = "POST" class="login" class="login">
-               <input type="hidden" name="userType" value=0>
-                <div class="field">
-                    <input type="Name" placeholder="Last Name" id="fname" name = "fname" required>
-                 </div>
-                 <div class="field">
-                  <input type="Name" placeholder="First Name" id="lname" name = "lname" required>
-                </div>
-                <div class="field">
-                  <input type="Location" placeholder="City" id="city" name = "city" required>
+               <form action="/auth/api/register" method="POST" class="login" enctype="multipart/form-data">
+                  <input type="hidden" name="userType" value="0">
+                  <div class="field">
+                      <input type="text" placeholder="First Name" id="fname" name="fname" required>
                   </div>
                   <div class="field">
-                      <input type="Contact" placeholder="Contact Number" id="contact" name = "contact" required>
-                   </div>
-                    <div class="field">
-                       <input type="text" placeholder="Email Address" id="email" name = "email" required>
-                    </div>
-                    <div class="field">
-                       <input type="password" placeholder="Password" id="password" name = "password" required>
-                    </div>
-                    <div class="store-img">
-                     <label for="storeImage">Upload Display Picture:</label>
-                     <input type="file" id="storeImage" name="storeImage">
-                 </div>
-                    <div class="field btn">
-                       <div class="btn-layer"></div>
-                       <input type="submit" value="Signup">
-                    </div>
+                      <input type="text" placeholder="Last Name" id="lname" name="lname" required>
                   </div>
-               </form>
+                  <div class="field">
+                      <input type="text" placeholder="City" id="city" name="city" required>
+                  </div>
+                  <div class="field">
+                      <input type="text" placeholder="Contact Number" id="contact" name="contact" required>
+                  </div>
+                  <div class="field">
+                      <input type="email" placeholder="Email Address" id="email" name="email" required>
+                  </div>
+                  <div class="field">
+                      <input type="password" placeholder="Password" id="password" name="password" required>
+                  </div>
+                  <div class="store-img">
+                      <label for="profileImage">Upload Display Picture:</label>
+                      <input type="file" id="Image" name="Image" accept="image/*">
+                  </div>
+                  <div class="field btn">
+                      <div class="btn-layer"></div>
+                      <input type="submit" value="Signup">
+                  </div>
+              </form>
+              
             </div>
          </div>
       </div>

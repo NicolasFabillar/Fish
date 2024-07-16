@@ -16,22 +16,29 @@ const capitalize = (str) => {
     return str.replace(/\b\w/g, match => match.toUpperCase());
 };
 
-exports.login = (req,res) => {
-    const {email, password, fishID, sellerPage} = req.body;
+exports.login = (req, res) => {
+    const { email, password, fishID, sellerPage } = req.body;
 
-    db.query(`SELECT * FROM users WHERE email = "${email}"`, async (error, results, fields) => {
-
+    db.query('SELECT * FROM users WHERE email = ?', [email], async (error, results, fields) => {
         if (error) {
-            console.log("error: ", error)
+            console.log("error: ", error);
+            return res.status(500).render('login', {
+                message: 'Internal server error'
+            });
         }
-        if (results.length == 0) {
+
+        if (results.length === 0) {
             return res.render('login', {
                 message: 'The email is not registered'
-            })
+            });
         }
-        if (results[0].password == password) {
+
+        const user = results[0];
+
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if (isPasswordMatch) {
             req.session.userEmail = email;
-            req.session.userID = results[0].id;
+            req.session.userID = user.id;
             req.session.isLoggedin = true;
 
             if (fishID) {
@@ -41,43 +48,84 @@ exports.login = (req,res) => {
             } else {
                 res.redirect('/');
             }
-        }
-        if (results[0].password != password) {
+        } else {
             return res.render('login', {
                 message: 'Wrong Password'
             });
         }
     });
+};
 
-}
-
-exports.register = (req,res) => {
-
+exports.register = (req, res) => {
     console.log(req.body);
 
-    const { fname, lname, email, city, contact, password, userType } = req.body;
+    const Image = req.file;
+    const { fname, lname, email, city, contact, password, userType, storeName } = req.body;
+
+    if (!Image) {
+        return res.render('signup', {
+            message: 'No file uploaded'
+        });
+    }
+
+    const targetDirectory = path.join(__dirname, "../public/profile_uploads/");
+    const targetPath = path.join(targetDirectory, Image.originalname);
 
     db.query('SELECT email FROM users WHERE email = ?', [email], (error, results) => {
         if (error) {
-            console.log("error: ", error)
+            console.error("Database error:", error);
+            return res.status(500).render('signup', {
+                message: 'Internal server error'
+            });
         }
         if (results.length > 0) {
             return res.render('signup', {
                 message: 'That email is already in use'
-            })
+            });
         }
-        db.query("INSERT INTO users SET ? ", {first_name: fname, last_name: lname, email: email, contact_number: contact, city: city, password: password, is_Seller: userType}, (error, results) => {
-            if (error){
-                console.log("error: ",error);
-            } else{
-                console.log(results)
-                return res.render('Login', {
-                    message: 'User Registered'
-                })
+
+        // Hash the password before storing it
+        bcrypt.hash(password, 10, (err, hashedPassword) => {
+            if (err) {
+                console.error('Hashing error:', err);
+                return res.status(500).render('signup', {
+                    message: 'Internal server error'
+                });
             }
-        })
+
+            fs.writeFile(targetPath, Image.buffer, (error) => { 
+                if (error) {
+                    console.error('File write error:', error);
+                    return res.status(500).send('File write error');
+                }
+
+                db.query("INSERT INTO users SET ?", {
+                    first_name: fname,
+                    last_name: lname,
+                    store_name: storeName,
+                    email: email,
+                    contact_number: contact,
+                    city: city,
+                    password: hashedPassword,
+                    is_Seller: userType
+                }, (error, results) => {
+                    if (error) {
+                        console.error("Database error:", error);
+                        return res.status(500).render('signup', {
+                            message: 'Internal server error'
+                        });
+                    } else 
+                    {
+                        console.log(results);
+                        return res.render('Login', {
+                            message: 'User Registered'
+                        });
+                    }
+                });
+            });
+        });
     });
-}
+};
 
 exports.listFish = (req, res) => {
     const userID = req.session.userID;
@@ -193,7 +241,7 @@ exports.productInfoRender = (req, res) => {
             });
         });
     } else {
-        res.render('login', {fishID})
+        res.render('login', {fishID, message: 'Login First'})
     }
 };
 
@@ -218,7 +266,7 @@ exports.sellersRender = (req, res) => {
             res.render('sellers', { allSellers });
         });
     } else {
-        res.render('login', {sellerPage})
+        res.render('login', {sellerPage, message: 'Login First'})
     }
 };
 

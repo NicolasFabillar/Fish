@@ -6,7 +6,8 @@ const upload = multer();
 
 const {login, register, updateProfile, listFish} = require("../controllers/auth")
 
-router.post("/api/register", register);
+router.post("/api/register",upload.single("Image"), register);
+
 router.post("/api/login", login);
 
 router.post("/api/listfish", upload.single("fishPhoto"), listFish); // Seller Post Fish
