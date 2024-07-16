@@ -39,6 +39,7 @@ exports.login = (req, res) => {
         if (isPasswordMatch) {
             req.session.userEmail = email;
             req.session.userID = user.id;
+            req.session.profileImage = user.profile_img;
             req.session.isLoggedin = true;
 
             if (fishID) {
@@ -107,6 +108,7 @@ exports.register = (req, res) => {
                     contact_number: contact,
                     city: city,
                     password: hashedPassword,
+                    profile_img: Image.originalname,
                     is_Seller: userType
                 }, (error, results) => {
                     if (error) {
@@ -311,6 +313,31 @@ exports.sellerInfoRender = (req, res) => {
     });
 };
 
+exports.profileRender = (req, res) => {
+    const userID = req.query.id;
+
+    db.query('SELECT * FROM users WHERE id = ?', [userID], (error, results) => {
+        if (error) {
+            console.log("error: ", error);
+            return res.status(500).send('Internal Server Error');
+        }
+    
+        if (results.length === 0) {
+            return res.status(404).send('User not found');
+        }
+    
+        const userData = {
+            id: results[0].id, // Access results as an array element
+            fullName: capitalize(results[0].first_name) + " " + capitalize(results[0].last_name), // Access first_name and last_name from results[0]
+            location: results[0].city,
+            contact: results[0].contact_number,
+            email: results[0].email,
+            img: results[0].profile_img,
+        };
+        
+        res.render('profilepage', { userData });
+    });
+};
 
 // exports.productRender = (req, res) => {
 //     db.query('SELECT * FROM fish_listings', (error, results) => {

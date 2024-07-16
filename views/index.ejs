@@ -37,18 +37,30 @@
           
           <div class="" id="">
 
-            <!-- Button Box -->
+            <% if (!userData.loginStatus) { %>
+              <!-- Button Box -->
              <div class="home-btn">
-               <div class="btn-box">
-                 <a href="/login" class="btn-1">
-                   Login
-                 </a>
-                 <a href="/signup" class="btn-2">
-                   Register
-                 </a>
-               </div>
-             </div>
-            <!-- ----- -->
+              <div class="btn-box">
+                <a href="/login" class="btn-1">
+                  Login
+                </a>
+                <a href="/signup" class="btn-2">
+                  Register
+                </a>
+              </div>
+            </div>
+           <!-- ----- -->
+          <% } else { %>
+            <div class="profile-container">
+              <a href="/profilepage?id=<%= userData.userID %>" class="profile-link">
+                <img src="/profile_uploads/<%= userData.profileImage %>" alt="Profile Icon" class="profile-icon">
+              </a>
+              <div class="dropdown-menu">
+                <a href="/profilepage?id=<%= userData.userID %>" class="dropdown-item">Profile</a>
+                <a href="/logout" class="dropdown-item">Log Out</a>
+              </div>
+            </div>
+          <% } %>
 
             <div class="User_option">
               <form class="form-inline my-2  mb-3 mb-lg-0">
@@ -507,6 +519,22 @@
       document.getElementById("myNav").classList.toggle("menu_width")
       document.querySelector(".custom_menu-btn").classList.toggle("menu_btn-style")
     }
+    document.addEventListener('DOMContentLoaded', function() {
+      var profileLink = document.querySelector('.profile-link');
+      var dropdownMenu = document.querySelector('.dropdown-menu');
+
+      profileLink.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+        dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!profileLink.contains(event.target) && !dropdownMenu.contains(event.target)) {
+          dropdownMenu.style.display = 'none';
+        }
+      });
+    });
   </script>
 
 </body>

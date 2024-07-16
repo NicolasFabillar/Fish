@@ -149,14 +149,14 @@
 
   <!-- seller info section -->
   <section class="seller-info">
-    <img src="https://via.placeholder.com/200" alt="Seller Icon" class="seller-icon">
+    <img src="/profile_uploads/<%= userData.img %>" alt="Seller Icon" class="seller-icon">
     <div class="seller-details">
       <h2>Fish Store</h2>
-      <p id="seller-name"><i class="fas fa-store icon"></i><strong>Seller Name:</strong> John's Fish Store</p>
+      <p id="seller-name"><i class="fas fa-store icon"></i><strong>Seller Name:</strong> <%= userData.fullName %></p>
       <p id="store-ratings"><i class="fas fa-star icon"></i><strong>Ratings:</strong> 4.5/5</p>
-      <p id="store-location"><i class="fas fa-map-marker-alt icon"></i><strong>Location:</strong> 123 Ocean Drive, Seaside Town</p>
-      <p id="store-contact"><i class="fas fa-phone icon"></i><strong>Contact Info:</strong> 1234567890</p>
-      <p id="store-email"><i class="fas fa-envelope icon"></i><strong>Email Address:</strong> storename@example.com</p>
+      <p id="store-location"><i class="fas fa-map-marker-alt icon"></i><strong>Location:</strong> <%= userData.location %></p>
+      <p id="store-contact"><i class="fas fa-phone icon"></i><strong>Contact Info:</strong> <%= userData.contact %></p>
+      <p id="store-email"><i class="fas fa-envelope icon"></i><strong>Email Address:</strong> <%= userData.email %></p>
       <a href="/edit" class="edit-profile-button">Edit Profile</a>
       <a href="/listing_form" class="edit-profile-button">Add Fish</a>
     </div>

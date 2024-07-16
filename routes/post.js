@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-const {productRender, userRender, editUserRender, logout, productInfoRender, sellersRender, sellerInfoRender} = require("../controllers/auth")
+const {productRender, userRender, editUserRender, logout, productInfoRender, sellersRender, sellerInfoRender, profileRender} = require("../controllers/auth")
 
 router.get("/", (req, res) => {
     const isLoggedIn = req.session?.isLoggedin;
+    const userID =  req.session?.userID;
+    const profileImage =  req.session?.profileImage;
     const userData = {
         loginStatus: isLoggedIn,
+        profileImage: profileImage,
+        userID: userID,
     };
     res.render("index", {userData});
 });
@@ -28,9 +32,7 @@ router.get("/edit-fish", (req,res) => {
     res.render("edit-fish")
 });
 
-router.get("/profilepage", (req,res) => {
-    res.render("profilepage")
-});
+router.get("/profilepage", profileRender); // render product list
 
 router.get("/contact", (req,res) => {
     res.render("contact")
@@ -63,9 +65,6 @@ router.get("/login", (req,res) => {
 router.get("/signup", (req,res) => {
     res.render("signup", message=false)
 });
-
-
-// router.get("/home", employeeRender);
 
 router.get("/profile", userRender); 
 
