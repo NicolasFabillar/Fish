@@ -336,14 +336,13 @@ form .btn input[type="submit"] {
 /* Store Image */
 .store-img {
   margin-top: 10px;
-  width: 105%; /* Make the container width 100% of its parent */
-  box-sizing: border-box; /* Include padding and border in the width */
+  width: 105%;
+  box-sizing: border-box; 
 }
 
 .store-img label {
   font-size: 0.7rem;
   color: #f87636;
-  /* margin-bottom: 10px; */
   display: block;
 }
 
@@ -352,7 +351,7 @@ form .btn input[type="submit"] {
   background-color: #f0f0f0;
   border: 1px solid #cccccc;
   border-radius: 5px;
-  width: calc(100% - 20px); /* Adjust based on your layout */
+  width: calc(100% - 20px); 
   height: 40px;
   box-sizing: border-box;
   font-size: 0.7rem;
@@ -360,9 +359,8 @@ form .btn input[type="submit"] {
 
 .store-img input[type="file"]:focus {
   outline: none;
-  border-color: #f87636; /* Example focus color */
-  box-shadow: 0 0 5px rgba(102, 175, 233, 0.6); /* Example focus shadow */
+  border-color: #f87636; 
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.6); 
 }
-
 
 /* ------------- */
