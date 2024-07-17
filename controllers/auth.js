@@ -181,6 +181,15 @@ exports.listFish = (req, res) => {
 };
 
 exports.productRender = (req, res) => {
+    const isLoggedIn = req.session?.isLoggedin;
+    const userID =  req.session?.userID;
+    const profileImage =  req.session?.profileImage;
+    const userData = {
+        loginStatus: isLoggedIn,
+        profileImage: profileImage,
+        userID: userID,
+    };
+
     db.query('SELECT * FROM fish_listings', (error, results) => {
         if (error) {
             console.log("error: ", error);
@@ -197,7 +206,7 @@ exports.productRender = (req, res) => {
             }))
         };
 
-        res.render('product-list', { allFishListings });
+        res.render('product-list', { allFishListings, userData });
     });
 };
 

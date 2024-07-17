@@ -34,8 +34,16 @@ router.get("/edit-fish", (req,res) => {
 
 router.get("/profilepage", profileRender); // render product list
 
-router.get("/contact", (req,res) => {
-    res.render("contact")
+router.get("/contact", (req, res) => {
+    const isLoggedIn = req.session?.isLoggedin;
+    const userID =  req.session?.userID;
+    const profileImage =  req.session?.profileImage;
+    const userData = {
+        loginStatus: isLoggedIn,
+        profileImage: profileImage,
+        userID: userID,
+    };
+    res.render("contact", {userData});
 });
 
 router.get("/product_list", productRender); // render product list
