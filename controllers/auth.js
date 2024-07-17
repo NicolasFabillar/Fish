@@ -282,7 +282,7 @@ exports.sellersRender = (req, res) => {
     const sellerPage = true;
 
     if (LoginStatus == true){ 
-        db.query('SELECT * FROM users WHERE is_Seller = ?',[1], (error, results) => {
+        db.query('SELECT * FROM users WHERE is_Seller = ? AND id != ?', [1, userData.userID], (error, results) => {
             if (error) {
                 console.log("error: ", error);
                 return res.status(500).send('Internal Server Error');
