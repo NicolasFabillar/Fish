@@ -230,6 +230,7 @@ exports.productRender = (req, res) => {
 };
 
 exports.productInfoRender = (req, res) => {
+    const userData = getUserData(req);
     const fishID = req.query.id;
     const LoginStatus = req.session.isLoggedin;
 
@@ -267,7 +268,7 @@ exports.productInfoRender = (req, res) => {
                     city: results[0].city,
                 };
     
-                res.render('product-info', { fishData, sellerData });
+                res.render('product-info', { fishData, sellerData, userData});
             });
         });
     } else {
@@ -276,6 +277,7 @@ exports.productInfoRender = (req, res) => {
 };
 
 exports.sellersRender = (req, res) => {
+    const userData = getUserData(req);
     const LoginStatus = req.session.isLoggedin;
     const sellerPage = true;
 
@@ -294,7 +296,7 @@ exports.sellersRender = (req, res) => {
                 }))
             };
     
-            res.render('sellers', { allSellers });
+            res.render('sellers', { allSellers, userData});
         });
     } else {
         res.render('login', {sellerPage, message: 'Login First'})

@@ -318,11 +318,11 @@
               </form>
             </div>
             <div class="profile-container">
-              <a href="/profilepage" class="profile-link">
-                <img src="/images/icon2.png" alt="Profile Icon" class="profile-icon">
+              <a href="/profilepage?id=<%= userData.userID %>" class="profile-link">
+                <img src="/profile_uploads/<%= userData.profileImage %>" alt="Profile Icon" class="profile-icon">
               </a>
               <div class="dropdown-menu">
-                <a href="/profilepage" class="dropdown-item">Profile</a>
+                <a href="/profilepage?id=<%= userData.userID %>" class="dropdown-item">Profile</a>
                 <a href="/logout" class="dropdown-item">Log Out</a>
               </div>
             </div>
