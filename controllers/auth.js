@@ -192,7 +192,6 @@ exports.productRender = (req, res) => {
         userID: userID,
         isSeller: isSeller,
     };
-    console.log(userData)
 
     db.query('SELECT * FROM fish_listings', (error, results) => {
         if (error) {
@@ -340,11 +339,12 @@ exports.profileRender = (req, res) => {
         }
     
         const userData = {
-            id: results[0].id, // Access results as an array element
+            id: results[0].id,
             fullName: capitalize(results[0].first_name) + " " + capitalize(results[0].last_name), // Access first_name and last_name from results[0]
             location: results[0].city,
             contact: results[0].contact_number,
             email: results[0].email,
+            isSeller: results[0].is_Seller,
             img: results[0].profile_img,
         };
         
