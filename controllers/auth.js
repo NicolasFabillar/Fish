@@ -40,6 +40,7 @@ exports.login = (req, res) => {
             req.session.userEmail = email;
             req.session.userID = user.id;
             req.session.profileImage = user.profile_img;
+            req.session.isSeller = user.is_Seller;
             req.session.isLoggedin = true;
 
             if (fishID) {
@@ -184,11 +185,14 @@ exports.productRender = (req, res) => {
     const isLoggedIn = req.session?.isLoggedin;
     const userID =  req.session?.userID;
     const profileImage =  req.session?.profileImage;
+    const isSeller =  req.session?.isSeller;
     const userData = {
         loginStatus: isLoggedIn,
         profileImage: profileImage,
         userID: userID,
+        isSeller: isSeller,
     };
+    console.log(userData)
 
     db.query('SELECT * FROM fish_listings', (error, results) => {
         if (error) {

@@ -188,9 +188,11 @@
                 <button class="btn my-sm-0 nav_search-btn" type="submit"></button>
               </form>
             </div>
-            <div class="add-fish-container">
-              <a href="/listing_form" class="btn btn-primary add-fish-btn">Add Fish</a>
-            </div>
+            <% if (userData.isSeller == 1) { %> 
+              <div class="add-fish-container">
+                <a href="/listing_form" class="btn btn-primary add-fish-btn">Add Fish</a>
+              </div>
+              <%} %>
             <% if (!userData.loginStatus) { %>
               <!-- Button Box -->
              <div class="home-btn">
