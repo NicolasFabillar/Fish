@@ -16,6 +16,22 @@ const capitalize = (str) => {
     return str.replace(/\b\w/g, match => match.toUpperCase());
 };
 
+function getUserData(req) {
+    const isLoggedIn = req.session?.isLoggedin;
+    const userID = req.session?.userID;
+    const profileImage = req.session?.profileImage;
+    const isSeller = req.session?.isSeller;
+
+    const userData = {
+        loginStatus: isLoggedIn,
+        profileImage: profileImage,
+        userID: userID,
+        isSeller: isSeller,
+    };
+
+    return userData;
+}
+
 exports.login = (req, res) => {
     const { email, password, fishID, sellerPage } = req.body;
 
@@ -274,6 +290,7 @@ exports.sellersRender = (req, res) => {
                 Seller: results.map((row, index) => ({
                     id: row.id, 
                     fullName: capitalize(row.first_name) + " " + capitalize(row.last_name),
+                    img: row.profile_img,
                 }))
             };
     
@@ -285,6 +302,7 @@ exports.sellersRender = (req, res) => {
 };
 
 exports.sellerInfoRender = (req, res) => {
+    const userData = getUserData(req);
     const sellerID = req.query.id;
 
     db.query('SELECT * FROM users WHERE id = ?', [sellerID], (error, userResults) => {
@@ -303,6 +321,8 @@ exports.sellerInfoRender = (req, res) => {
             contact: userResults[0].contact_number,
             email: userResults[0].email,
             city: userResults[0].city,
+            img: userResults[0].profile_img,
+            storeName: userResults[0].store_name,
         };
 
         db.query('SELECT * FROM fish_listings WHERE sellerID = ?', [sellerID], (fishError, fishResults) => {
@@ -320,7 +340,7 @@ exports.sellerInfoRender = (req, res) => {
                     img: row.fish_img,
                 }))
             };
-            res.render('sellerinfo', { sellerData, allFishListings });
+            res.render('sellerinfo', { sellerData, allFishListings, userData });
         });
     });
 };

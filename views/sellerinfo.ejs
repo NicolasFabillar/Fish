@@ -206,11 +206,11 @@
               </form>
             </div>
             <div class="profile-container">
-              <a href="/profilepage" class="profile-link">
-                <img src="/images/icon2.png" alt="Profile Icon" class="profile-icon">
+              <a href="/profilepage?id=<%= userData.userID %>" class="profile-link">
+                <img src="/profile_uploads/<%= userData.profileImage %>" alt="Profile Icon" class="profile-icon">
               </a>
               <div class="dropdown-menu">
-                <a href="/profilepage" class="dropdown-item">Profile</a>
+                <a href="/profilepage?id=<%= userData.userID %>" class="dropdown-item">Profile</a>
                 <a href="/logout" class="dropdown-item">Log Out</a>
               </div>
             </div>
@@ -237,10 +237,10 @@
 
   <!-- seller info section -->
   <section class="seller-info">
-    <img src="https://via.placeholder.com/100" alt="Seller Icon" class="seller-icon">
+    <img src="/profile_uploads/<%= sellerData.img %>" alt="Seller Icon" class="seller-icon">
     <div class="seller-details">
       <h2><%= sellerData.fullName %></h2>
-      <p id="store-name"><i class="fas fa-store icon"></i><strong>Store Name:</strong> Store</p>
+      <p id="store-name"><i class="fas fa-store icon"></i><strong>Store Name:</strong> <%= sellerData.storeName %></p>
       <p id="store-ratings"><i class="fas fa-star icon"></i><strong>Ratings:</strong> 4.5/5</p>
       <p id="store-location"><i class="fas fa-map-marker-alt icon"></i><strong>Location:</strong> <%= sellerData.city %></p>
       <p id="store-contact"><i class="fas fa-phone icon"></i><strong>Contact Info:</strong> <%= sellerData.contact %></p>
