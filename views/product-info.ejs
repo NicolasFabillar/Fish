@@ -350,7 +350,9 @@
   <main>
     <div class="card-header">
       <button onclick="location.href='/product_list'" class="btn btn-primary">← Back</button>
-      <button onclick="location.href='/edit-fish'" class="btn btn-primary">Edit Fish</button>
+      <% if (fishOwner === true) { %> 
+        <button onclick="location.href='/edit-fish?id=<%= fishData.id %>'" class="btn btn-primary">Edit Fish</button>
+    <% } %>
   </div>
     <div class="container-fluid">
         <div class="row justify-content-center">

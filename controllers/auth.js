@@ -253,6 +253,8 @@ exports.productInfoRender = (req, res) => {
                 price: results[0].price,
                 img: results[0].fish_img,
             };
+
+            const fishOwner = fishData.seller == userData.userID;
     
             db.query('SELECT * FROM users WHERE id = ?', [fishData.seller], (error, results) => {
                 if (error) {
@@ -268,7 +270,7 @@ exports.productInfoRender = (req, res) => {
                     city: results[0].city,
                 };
     
-                res.render('product-info', { fishData, sellerData, userData});
+                res.render('product-info', { fishData, sellerData, userData, fishOwner});
             });
         });
     } else {
