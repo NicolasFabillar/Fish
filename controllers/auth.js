@@ -75,8 +75,6 @@ exports.login = (req, res) => {
 };
 
 exports.register = (req, res) => {
-    console.log(req.body);
-
     const Image = req.file;
     const { fname, lname, email, city, contact, password, userType, storeName } = req.body;
 
@@ -147,8 +145,8 @@ exports.register = (req, res) => {
 };
 
 exports.listFish = (req, res) => {
-    const userID = req.session.userID;
-    const { fish_name, description, price, category } = req.body;
+    const userData = getUserData(req);
+    const { fish_name, description, price, category, takingCareGuide } = req.body;
     const fishPhoto = req.file;
     
     if (!fishPhoto) {
@@ -160,7 +158,7 @@ exports.listFish = (req, res) => {
     const targetDirectory = path.join(__dirname, "../public/fish_uploads/");
 
     db.query('SELECT * FROM fish_listings WHERE sellerID = ? AND fish_name = ?', 
-        [userID, fish_name], (error, results) => {
+        [userData.userID, fish_name], (error, results) => {
         if (error) {
             console.error("Database query error: ", error);
             return res.status(500).send('Database query error');
@@ -180,8 +178,8 @@ exports.listFish = (req, res) => {
             }
             console.log(`File has been moved to ${targetPath}`);
 
-            const query = 'INSERT INTO fish_listings (sellerID, fish_name, description, price, category, fish_img) VALUES (?, ?, ?, ?, ?, ?)';
-            const values = [userID, fish_name, description, price, category, fishPhoto.originalname];
+            const query = 'INSERT INTO fish_listings (sellerID, fish_name, description, price, category, fish_img, taking_care_guide) VALUES (?, ?, ?, ?, ?, ?, ?)';
+            const values = [userData.userID, fish_name, description, price, category, fishPhoto.originalname, takingCareGuide];
 
             db.query(query, values, (err, result) => {
                 if (err) {
@@ -189,25 +187,14 @@ exports.listFish = (req, res) => {
                     return res.status(500).send('Database insert error');
                 }
 
-                return res.render('listingform', {
-                    message: 'Listing Successful'
-                });
+                return res.redirect('/product_list');
             });
         });
     });
 };
 
 exports.productRender = (req, res) => {
-    const isLoggedIn = req.session?.isLoggedin;
-    const userID =  req.session?.userID;
-    const profileImage =  req.session?.profileImage;
-    const isSeller =  req.session?.isSeller;
-    const userData = {
-        loginStatus: isLoggedIn,
-        profileImage: profileImage,
-        userID: userID,
-        isSeller: isSeller,
-    };
+    const userData = getUserData(req);
 
     db.query('SELECT * FROM fish_listings', (error, results) => {
         if (error) {
@@ -250,6 +237,7 @@ exports.productInfoRender = (req, res) => {
                 seller: results[0].sellerID,  
                 fish_name: capitalize(results[0].fish_name),
                 description: results[0].description,
+                takingCareGuide: results[0].taking_care_guide,
                 price: results[0].price,
                 img: results[0].fish_img,
             };
@@ -378,7 +366,7 @@ exports.profileRender = (req, res) => {
     });
 };
 
-exports.editProfile = (req, res) => {
+exports.editProfileRender = (req, res) => {
     const userID = req.query.id;
 
     db.query('SELECT * FROM users WHERE id = ?', [userID], (error, results) => {
@@ -407,6 +395,33 @@ exports.editProfile = (req, res) => {
         res.render('edit', { userData });
     });
 };
+
+exports.editFishRender = (req, res) => {
+    const fishID = req.query.id;
+
+    db.query('SELECT * FROM fish_listings WHERE id = ?', [fishID], (error, results) => {
+        if (error) {
+            console.log("error: ", error);
+            return res.status(500).send('Internal Server Error');
+        }
+    
+        if (results.length === 0) {
+            return res.status(404).send('User not found');
+        }
+    
+        const fishData = {
+            id: req.query.id,
+            fishName: capitalize(results[0].fish_name),
+            description: results[0].description,
+            category: results[0].category,
+            price: results[0].price,
+            fish_img: results[0].fish_img,
+        };
+        
+        res.render('edit', { userData });
+    });
+};
+
 
 // exports.productRender = (req, res) => {
 //     db.query('SELECT * FROM fish_listings', (error, results) => {
