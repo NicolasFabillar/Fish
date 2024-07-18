@@ -413,15 +413,93 @@ exports.editFishRender = (req, res) => {
             id: req.query.id,
             fishName: capitalize(results[0].fish_name),
             description: results[0].description,
+            takingCareGuide: results[0].taking_care_guide,
             category: results[0].category,
             price: results[0].price,
             fish_img: results[0].fish_img,
         };
         
-        res.render('edit', { userData });
+        res.render('edit-fish', { fishData });
     });
 };
 
+exports.updateFish = (req, res) => {
+    const { id, fishName, description, price, category, takingCareGuide } = req.body;
+    const fishImage = req.file;
+
+    let query = 'UPDATE fish_listings SET fish_name=?, description=?, taking_care_guide=?, category=?, price=?';
+    const queryParams = [fishName, description, takingCareGuide, category, price];
+
+    if (fishImage) {
+        const targetDirectory = path.join(__dirname, "../public/fish_uploads/");
+        const targetPath = path.join(targetDirectory, fishImage.originalname);
+
+        // Retrieve the current profile image from the database
+        db.query('SELECT fish_img FROM fish_listings WHERE id=?', [id], (error, results) => {
+            if (error) {
+                console.error('Database query error:', error);
+                return res.status(500).send('Internal Server Error');
+            }
+
+            const currentFishImage = results[0].fish_img;
+            if (currentFishImage) {
+                const currentImagePath = path.join(targetDirectory, currentFishImage);
+
+                // Remove the current profile image
+                fs.unlink(currentImagePath, (err) => {
+                    if (err) {
+                        console.error('File delete error:', err);
+                    }
+                });
+            }
+
+            // Write the new profile image to the target path
+            fs.writeFile(targetPath, fishImage.buffer, (error) => {
+                if (error) {
+                    console.error('File write error:', error);
+                    return res.status(500).send('File write error');
+                }
+
+                query += ', fish_img=?';
+                queryParams.push(fishImage.originalname);
+
+                query += ' WHERE id=?';
+                queryParams.push(id);
+
+                db.query(query, queryParams, (error, results) => {
+                    if (error) {
+                        console.error('Database update error:', error);
+                        return res.status(500).json({ error: 'Internal Server Error' });
+                    }
+
+                    if (results.affectedRows === 0) {
+                        return res.status(404).json({ error: 'Listing not found' });
+                    }
+
+                    req.session.message = 'Profile updated successfully';
+                    res.redirect(`/product_info?id=${id}`);
+                });
+            });
+        });
+    } else {
+        query += ' WHERE id=?';
+        queryParams.push(id);
+
+        db.query(query, queryParams, (error, results) => {
+            if (error) {
+                console.error('Database update error:', error);
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
+
+            if (results.affectedRows === 0) {
+                return res.status(404).json({ error: 'Listing not found' });
+            }
+
+            req.session.message = 'Profile updated successfully';
+            res.redirect(`/profilepage?id=${id}`);
+        });
+    }
+};
 
 // exports.productRender = (req, res) => {
 //     db.query('SELECT * FROM fish_listings', (error, results) => {

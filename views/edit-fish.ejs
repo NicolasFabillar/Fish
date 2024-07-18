@@ -220,24 +220,25 @@
         </div>
         <div class="main-content">
             <h1>Edit Fish</h1>
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="/auth/api/updateFish" method="POST" enctype="multipart/form-data">
                     <div class="left-column">
+                    <input type="text" id="id" name="id" value="<%= fishData.id %>" hidden>
                     <div class="form-group">
                         <label for="fishName">Fish Name</label>
-                        <input type="text" id="fishName" name="fishName" value="Goldfish">
+                        <input type="text" id="fishName" name="fishName" value="<%= fishData.fishName %>">
                     </div>
                     <div class="form-group">
                         <label for="description">Fish Description</label>
-                        <textarea id="description" name="description" rows="4">lorem ipsum.</textarea>
-                    </div>
+                        <textarea id="description" name="description" rows="4" required><%= fishData.description %> </textarea>
+                      </div>
                     <div class="form-group">
                         <label for="price">Price</label>
-                        <input type="text" id="price" name="price" value="600"></textarea>
+                        <input type="text" id="price" name="price" value=<%= fishData.price %>></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="category">Category:</label>
+                        <label for="category">Category</label>
                         <select id="category" name="category" required>
-                          <option value="">Select category...</option>
+                          <option value="<%= fishData.category %>"><%= fishData.category %></option>
                           <option value="freshwater">Freshwater</option>
                           <option value="saltwater">Saltwater</option>
                           <option value="pet">Pet</option>
@@ -246,12 +247,12 @@
                       </div>
                     <div class="form-group">
                         <label for="takingCareGuide">Taking Care Guide</label>
-                        <textarea id="takingCareGuide" name="takingCareGuide" rows="6">Ensure the tank is clean and maintain proper temperature.</textarea>
+                        <textarea id="takingCareGuide" name="takingCareGuide" rows="6"><%= fishData.takingCareGuide %></textarea>
                     </div>
                 </div>
                     <div class="right-column">
                         <div class="fish-image">
-                            <img src="https://via.placeholder.com/300" alt="Fish Image" id="fishImagePreview">
+                            <img src="/fish_uploads/<%= fishData.fish_img %>" alt="Fish Image" id="fishImagePreview">
                             <label for="fishImage">Select Fish Picture</label>
                             <input type="file" id="fishImage" name="fishImage" accept="image/*" onchange="previewImage(event)">
                         </div>
