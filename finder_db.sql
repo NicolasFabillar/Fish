@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jul 16, 2024 at 10:20 PM
+-- Generation Time: Jul 18, 2024 at 02:51 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -33,19 +33,21 @@ CREATE TABLE IF NOT EXISTS `fish_listings` (
   `sellerID` int NOT NULL,
   `fish_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `description` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `taking_care_guide` varchar(400) NOT NULL,
   `category` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `price` int NOT NULL,
   `fish_img` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `fish_listings`
 --
 
-INSERT INTO `fish_listings` (`id`, `sellerID`, `fish_name`, `description`, `category`, `price`, `fish_img`) VALUES
-(1, 0, 'Nemo', 'sadadas', 'freshwater', 32232, 'White Black Neon Green Modern SWOT Analysis Infographics (1).png'),
-(2, 0, 'Nemooo', 'dasdasdas', 'freshwater', 32232, '2024-Yamaha-XS125-EU-Heritage_White-Static-004-03.jpg');
+INSERT INTO `fish_listings` (`id`, `sellerID`, `fish_name`, `description`, `taking_care_guide`, `category`, `price`, `fish_img`) VALUES
+(1, 2, 'Nemo', 'sadadas', '', 'freshwater', 32232, 'White Black Neon Green Modern SWOT Analysis Infographics (1).png'),
+(3, 1, 'Betta', 'Best Fish for beginners', '', 'pet', 65, 'JK Flip-Flop Even Counter - Fabillar.png'),
+(5, 1, 'Nemoo', 'The long-lost fish in the sea.', 'The long-lost fish in the sea.', 'saltwater', 10000, 'Wallpaper.jpg');
 
 -- --------------------------------------------------------
 
@@ -94,14 +96,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `is_Seller` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `profile_img` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `store_name`, `city`, `email`, `contact_number`, `password`, `profile_img`, `is_Seller`) VALUES
-(21, 'nico', 'nico', 'Banana Store', 'San Fernando', 'banana@gmail.com', 2147483647, '$2a$10$qyjFJClNWs5.nUoB3O3WvumVMjTdl49oTfQNUObKx2TM2108NpK0y', '', 1);
+(1, 'Nicolas Alexander', 'nicoo', 'Banana Store', 'San Fernando', 'banana@gmail.com', 2147483647, '$2a$10$kRsJFJ4G01wdsQPA915V3.2L9LF1MYrp0ZsSP.oBZR/Vu6Tcc.FKm', 'Scholars.jpg', 1),
+(2, 'nicolas', 'nicolas', 'Banana Beach Store', 'San Fernando', 'banana3@gmail.com', 2147483647, '$2a$10$BAlSmLxXZj60AtO3DrshYOYl2yf7lRvwqFwDVyBPjPEdwEzZMc.di', '2024-Yamaha-XS125-EU-Heritage_White-Static-004-03.jpg', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
