@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {productRender, userRender, editUserRender, logout, productInfoRender, sellersRender, sellerInfoRender, profileRender} = require("../controllers/auth")
+const {productRender, userRender, editUserRender, logout, productInfoRender, sellersRender, sellerInfoRender, profileRender, editProfile} = require("../controllers/auth")
 
 router.get("/", (req, res) => {
     const isLoggedIn = req.session?.isLoggedin;
@@ -24,9 +24,7 @@ router.get("/listing_form", (req,res) => {
     }
 });
 
-router.get("/edit", (req,res) => {
-    res.render("edit")
-});
+router.get("/edit", editProfile);
 
 router.get("/edit-fish", (req,res) => {
     res.render("edit-fish")

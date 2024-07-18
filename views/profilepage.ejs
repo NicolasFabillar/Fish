@@ -181,7 +181,7 @@
       <p id="store-location"><i class="fas fa-map-marker-alt icon"></i><strong>Location:</strong> <%= userData.location %></p>
       <p id="store-contact"><i class="fas fa-phone icon"></i><strong>Contact Info:</strong> <%= userData.contact %></p>
       <p id="store-email"><i class="fas fa-envelope icon"></i><strong>Email Address:</strong> <%= userData.email %></p>
-      <a href="/edit" class="edit-profile-button">Edit Profile</a>
+      <a href="/edit?id=<%= userData.id %>" class="edit-profile-button">Edit Profile</a>
       <% if (userData.isSeller == 1) { %> 
         <a href="/listing_form" class="edit-profile-button">Add Fish</a>
         <%} %>

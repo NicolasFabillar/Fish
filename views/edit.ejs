@@ -217,43 +217,42 @@
         
         <div class="main-content">
             <h1>Edit Profile</h1>
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="/auth/api/updateProfile" method="POST" enctype="multipart/form-data">
                     <div class="left-column">
+                    <input type="text" id="id" name="id" value="<%= userData.id %>" hidden>
+                    <% if (userData.isSeller == 1) { %> 
+                        <div class="form-group">
+                            <label for="storeName">Store Name</label>
+                            <input type="text" id="storeName" name="storeName" value="<%= userData.storeName %>">
+                        </div>
+                        <%} %>
                     <div class="form-group">
-                        <label for="storeName">Store Name</label>
-                        <input type="text" id="storeName" name="storeName" value="Fishy Delights">
+                        <label for="sellerName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" value="<%= userData.firstName %>">
                     </div>
                     <div class="form-group">
-                        <label for="sellerName">Seller Name</label>
-                        <input type="text" id="sellerName" name="sellerName" value="John Doe">
-                    </div>
-                    <div class="form-group">
-                        <label for="ratings">Ratings</label>
-                        <input type="text" id="ratings" name="ratings" value="4.5">
+                        <label for="sellerName">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" value="<%= userData.lastName %>">
                     </div>
                     <div class="form-group">
                         <label for="location">Location</label>
-                        <input type="text" id="location" name="location" value="123 Ocean Drive, Seaside Town">
+                        <input type="text" id="location" name="location" value="<%= userData.location %>">
                     </div>
                     <div class="form-group">
                         <label for="contactNumber">Contact Number</label>
-                        <input type="text" id="contactNumber" name="contactNumber" value="1234567890">
-                    </div>
-                    <div class="form-group">
-                        <label for="emailAddress">Email Address</label>
-                        <input type="text" id="emailAddress" name="emailAddress" value="storename@example.com">
+                        <input type="text" id="contactNumber" name="contactNumber" value="<%= userData.contact %>">
                     </div>
                 </div>
                     <div class="right-column">
                         <div class="store-image">
-                            <img src="https://via.placeholder.com/100" alt="Store Image" id="storeImagePreview">
-                            <input type="file" id="storeImage" name="storeImage" accept="image/*" onchange="previewImage(event)">
+                            <img src="/profile_uploads/<%= userData.img %>" alt="Store Image" id="storeImagePreview">
+                            <input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewImage(event)">
                         </div>
                         <div class="form-group">
-                            <label for="email1">Login Email</label>
-                            <input type="email" id="email1" name="email1" value="login@example.com">
+                            <label for="emailAddress">Email Address</label>
+                            <input type="text" id="emailAddress" name="emailAddress" value="<%= userData.email %>" disabled>
                         </div>
-                        <div class="form-group position-relative">
+                        <!-- <div class="form-group position-relative">
                             <label for="password">Password</label>
                             <input type="password" id="password" name="password">
                             <span class="password-toggle" onclick="togglePasswordVisibility()">
@@ -262,7 +261,7 @@
                                     <path d="M8 6c.552 0 1 .448 1 1s-.448 1-1 1-1-.448-1-1 .448-1 1-1z"/>
                                 </svg>
                             </span>
-                        </div>
+                        </div> -->
                         <div class="actions">
                             <button type="submit" class="save">Save Changes</button>
                             <button type="button" class="cancel" id="cancelButton">Cancel</button>

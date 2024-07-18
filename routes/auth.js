@@ -12,6 +12,6 @@ router.post("/api/login", login);
 
 router.post("/api/listfish", upload.single("fishPhoto"), listFish); // Seller Post Fish
 
-router.post("/api/updateProfile", updateProfile);
+router.post("/api/updateProfile", upload.single("profileImage"), updateProfile);
 
 module.exports = router;

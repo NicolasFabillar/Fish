@@ -348,6 +348,7 @@ exports.sellerInfoRender = (req, res) => {
 };
 
 exports.profileRender = (req, res) => {
+    const isLoggedIn = req.session?.isLoggedin;
     const userID = req.query.id;
 
     db.query('SELECT * FROM users WHERE id = ?', [userID], (error, results) => {
@@ -361,7 +362,8 @@ exports.profileRender = (req, res) => {
         }
     
         const userData = {
-            id: results[0].id,
+            loginStatus: isLoggedIn,
+            id: req.query.id,
             fullName: capitalize(results[0].first_name) + " " + capitalize(results[0].last_name), // Access first_name and last_name from results[0]
             location: results[0].city,
             contact: results[0].contact_number,
@@ -371,6 +373,36 @@ exports.profileRender = (req, res) => {
         };
         
         res.render('profilepage', { userData });
+    });
+};
+
+exports.editProfile = (req, res) => {
+    const userID = req.query.id;
+
+    db.query('SELECT * FROM users WHERE id = ?', [userID], (error, results) => {
+        if (error) {
+            console.log("error: ", error);
+            return res.status(500).send('Internal Server Error');
+        }
+    
+        if (results.length === 0) {
+            return res.status(404).send('User not found');
+        }
+    
+        const userData = {
+            id: req.query.id,
+            fullName: capitalize(results[0].first_name) + " " + capitalize(results[0].last_name),
+            firstName: results[0].first_name,
+            lastName: results[0].last_name,
+            storeName: results[0].store_name,
+            location: results[0].city,
+            contact: results[0].contact_number,
+            email: results[0].email,
+            isSeller: results[0].is_Seller,
+            img: results[0].profile_img,
+        };
+        
+        res.render('edit', { userData });
     });
 };
 
@@ -410,22 +442,81 @@ exports.logout = (req, res) => {
 };
 
 exports.updateProfile = (req, res) => {
-    const userEmail = req.session.userEmail;
-    const { fname, lname, bdate, position } = req.body;
+    const { id, firstName, lastName, storeName, location, contactNumber } = req.body;
+    const profileImage = req.file;
 
-    db.query('UPDATE users SET first_name=?, last_name=?, birth_date=?, position=? WHERE email=?', [fname, lname, bdate, position, userEmail], (error, results) => {
-        if (error) {
-            console.log("error: ", error);
-            return res.status(500).json({ error: "Internal Server Error" });
-        }
+    let query = 'UPDATE users SET first_name=?, last_name=?, store_name=?, city=?, contact_number=?';
+    const queryParams = [firstName, lastName, storeName, location, contactNumber];
 
-        if (results.affectedRows === 0) {
-            return res.status(404).json({ error: "User not found" });
-        }
+    if (profileImage) {
+        const targetDirectory = path.join(__dirname, "../public/profile_uploads/");
+        const targetPath = path.join(targetDirectory, profileImage.originalname);
 
-        req.session.message = "Profile updated successfully";
-        res.redirect('/edit-profile')
-    });
+        // Retrieve the current profile image from the database
+        db.query('SELECT profile_img FROM users WHERE id=?', [id], (error, results) => {
+            if (error) {
+                console.error('Database query error:', error);
+                return res.status(500).send('Internal Server Error');
+            }
+
+            const currentProfileImage = results[0].profile_img;
+            if (currentProfileImage) {
+                const currentImagePath = path.join(targetDirectory, currentProfileImage);
+
+                // Remove the current profile image
+                fs.unlink(currentImagePath, (err) => {
+                    if (err) {
+                        console.error('File delete error:', err);
+                    }
+                });
+            }
+
+            // Write the new profile image to the target path
+            fs.writeFile(targetPath, profileImage.buffer, (error) => {
+                if (error) {
+                    console.error('File write error:', error);
+                    return res.status(500).send('File write error');
+                }
+
+                query += ', profile_img=?';
+                queryParams.push(profileImage.originalname);
+
+                query += ' WHERE id=?';
+                queryParams.push(id);
+
+                db.query(query, queryParams, (error, results) => {
+                    if (error) {
+                        console.log("error: ", error);
+                        return res.status(500).json({ error: "Internal Server Error" });
+                    }
+
+                    if (results.affectedRows === 0) {
+                        return res.status(404).json({ error: "User not found" });
+                    }
+
+                    req.session.message = "Profile updated successfully";
+                    res.redirect(`/profilepage?id=${id}`);
+                });
+            });
+        });
+    } else {
+        query += ' WHERE id=?';
+        queryParams.push(id);
+
+        db.query(query, queryParams, (error, results) => {
+            if (error) {
+                console.log("error: ", error);
+                return res.status(500).json({ error: "Internal Server Error" });
+            }
+
+            if (results.affectedRows === 0) {
+                return res.status(404).json({ error: "User not found" });
+            }
+
+            req.session.message = "Profile updated successfully";
+            res.redirect(`/profilepage?id=${id}`);
+        });
+    }
 };
 
 exports.userRender = (req, res) => {
