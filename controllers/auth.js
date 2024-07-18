@@ -501,41 +501,6 @@ exports.updateFish = (req, res) => {
     }
 };
 
-// exports.productRender = (req, res) => {
-//     db.query('SELECT * FROM fish_listings', (error, results) => {
-//         if (error) {
-//             console.log("error: ", error);
-//             return res.status(500).send('Internal Server Error');
-//         }
-
-//         const allFishListings = {
-//             employeeData: results.map((row, index) => ({
-//                 id: index + 1, 
-//                 fname: capitalize(row.first_name),
-//                 lname: capitalize(row.last_name),
-//                 fullName: capitalize(row.first_name) + " " + capitalize(row.last_name),
-//                 bdate: new Date(row.birth_date).toLocaleDateString(),
-//                 email: row.email,
-//                 position: row.position,
-//                 salary: row.salary,
-//             }))
-//         };
-//         console.log()
-
-//         res.render('home', { allEmployeeData });
-//     });
-// };
-
-exports.logout = (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            console.error('Error destroying session:', err);
-            return res.status(500).send('Internal Server Error');
-        }
-        res.redirect('/');
-    });
-};
-
 exports.updateProfile = (req, res) => {
     const { id, firstName, lastName, storeName, location, contactNumber } = req.body;
     const profileImage = req.file;
@@ -612,6 +577,73 @@ exports.updateProfile = (req, res) => {
             res.redirect(`/profilepage?id=${id}`);
         });
     }
+};
+
+exports.deleteFish = (req, res) => {
+    const fishID = req.query.id;
+
+    // Retrieve the current profile image from the database (optional, if you still need to fetch the image info)
+    db.query('SELECT fish_img FROM fish_listings WHERE id=?', [fishID], (error, results) => {
+        if (error) {
+            console.error('Database query error:', error);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        if (results.length === 0) {
+            return res.status(404).json({ error: 'Listing not found' });
+        }
+
+        // Delete the fish listing from the database
+        db.query('DELETE FROM fish_listings WHERE id=?', [fishID], (error, results) => {
+            if (error) {
+                console.error('Database delete error:', error);
+                return res.status(500).send('Internal Server Error');
+            }
+
+            if (results.affectedRows === 0) {
+                return res.status(404).json({ error: 'Listing not found' });
+            }
+
+            req.session.message = 'Listing deleted successfully';
+            res.redirect('/product_list'); // Redirect to the listings page after deletion
+        });
+    });
+};
+
+
+// exports.productRender = (req, res) => {
+//     db.query('SELECT * FROM fish_listings', (error, results) => {
+//         if (error) {
+//             console.log("error: ", error);
+//             return res.status(500).send('Internal Server Error');
+//         }
+
+//         const allFishListings = {
+//             employeeData: results.map((row, index) => ({
+//                 id: index + 1, 
+//                 fname: capitalize(row.first_name),
+//                 lname: capitalize(row.last_name),
+//                 fullName: capitalize(row.first_name) + " " + capitalize(row.last_name),
+//                 bdate: new Date(row.birth_date).toLocaleDateString(),
+//                 email: row.email,
+//                 position: row.position,
+//                 salary: row.salary,
+//             }))
+//         };
+//         console.log()
+
+//         res.render('home', { allEmployeeData });
+//     });
+// };
+
+exports.logout = (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Error destroying session:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        res.redirect('/');
+    });
 };
 
 exports.userRender = (req, res) => {

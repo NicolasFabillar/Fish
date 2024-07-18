@@ -259,7 +259,7 @@
                         <div class="actions">
                             <button type="submit" class="save">Save Changes</button>
                             <button type="button" class="cancel" onclick="location.href='';">Cancel</button>
-                            <button type="button" class="delete" onclick="deleteFish();">Delete Fish</button>
+                            <button type="button" class="delete" onclick="window.location.href='/auth/api/deleteFish?id=<%= fishData.id %>'">Delete Fish</button>
                         </div>
                     </div>
             </form>
