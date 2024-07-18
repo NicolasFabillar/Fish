@@ -41,37 +41,38 @@
     }
 
     .card {
-    background-color: rgba(255, 255, 255, 0.331);
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    margin-bottom: 16px;
-    text-align: center;
-    border-radius: 10px;
-    overflow: hidden;
-    /* Fixed size for the card container */
-    width: 450px;
-    height: 420px;
+      background-color: rgba(255, 255, 255, 0.331);
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      transition: 0.3s;
+      margin-bottom: 16px;
+      text-align: center;
+      border-radius: 10px;
+      overflow: hidden;
+      /* Fixed size for the card container */
+      width: 450px;
+      height: 420px;
+      display: flex;
+      position: relative;
     }
 
     .card img {
-        width: 100%;
-        height: 100%;
-        object-fit: fill; /* This ensures the image covers the area without stretching */
+      width: 450px;
+      height: 400px;
+      object-fit: cover; /* This ensures the image covers the area without stretching */
     }
 
 
     .card-body {
-        padding: 20px;
-        position: relative; /* Ensure content remains within the card */
-        z-index: 1; /* Ensure content is above the image */
-
-
+      padding: 20px;
+      position: relative; /* Ensure content remains within the card */
+      z-index: 1; /* Ensure content is above the image */
     }
 
+
     .card-title {
-        margin-top: 10px;
-        font-size: 24px;
-        color: #fff;
+      margin-top: 10px;
+      font-size: 24px;
+      color: #fff;
     }
 
     .card-text {
@@ -152,7 +153,7 @@
 
         .card-wrapper .card img {
             width: 100%;
-            height: auto;
+            height: 68%;
         }
 
         .card-wrapper .card-body {
@@ -257,7 +258,7 @@
       align-items: center;
       position: relative; /* Necessary for positioning the dropdown */
       margin-top: 20px;
-      margin-right: 190px;
+      margin-right: 210px;
       margin-bottom: 40px;
     }
 
@@ -267,8 +268,8 @@
     }
 
     .profile-icon {
-      width: 80px;
-      height: 80px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
     }
 
