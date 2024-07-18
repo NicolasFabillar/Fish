@@ -160,11 +160,11 @@
            <!-- ----- -->
           <% } else { %>
             <div class="profile-container">
-              <a href="/profilepage?id=<%= userData.userID %>" class="profile-link">
-                <img src="/profile_uploads/<%= userData.profileImage %>" alt="Profile Icon" class="profile-icon">
+              <a href="/profilepage?id=<%= userData.id %>" class="profile-link">
+                <img src="/profile_uploads/<%= userData.img %>" alt="Profile Icon" class="profile-icon">
               </a>
               <div class="dropdown-menu">
-                <a href="/profilepage?id=<%= userData.userID %>" class="dropdown-item">Profile</a>
+                <a href="/profilepage?id=<%= userData.id %>" class="dropdown-item">Profile</a>
                 <a href="/logout" class="dropdown-item">Log Out</a>
               </div>
             </div>

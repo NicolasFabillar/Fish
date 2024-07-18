@@ -554,7 +554,8 @@ exports.updateProfile = (req, res) => {
                         return res.status(404).json({ error: "User not found" });
                     }
 
-                    req.session.message = "Profile updated successfully";
+                    req.session.profileImage = profileImage.originalname;
+
                     res.redirect(`/profilepage?id=${id}`);
                 });
             });
