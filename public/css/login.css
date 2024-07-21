@@ -5,13 +5,31 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-html,
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  background: url(../images/loginbg.png) no-repeat center center/cover;
+  height: auto;
+  width: auto;
+  background: url(../images/loginbg.png);
+  background-repeat: no-repeat;
+  background-position: center; /* Center the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+
+
+}
+
+.background {
+  display: flex;
+  align-items: center;
+  height: auto;
+  width: auto;
+  background: url(../images/loginbg.png);
+  background-repeat: no-repeat;
+  background-size: cover; /* Resize the background image to cover the entire container */
+
+
 }
 ::selection {
   background: #f87636;
