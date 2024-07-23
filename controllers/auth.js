@@ -256,6 +256,7 @@ exports.productInfoRender = (req, res) => {
                     contact: results[0].contact_number,
                     email: results[0].email,
                     city: results[0].city,
+                    img: results[0].profile_img,
                 };
     
                 res.render('product-info', { fishData, sellerData, userData, fishOwner});
@@ -496,7 +497,7 @@ exports.updateFish = (req, res) => {
             }
 
             req.session.message = 'Profile updated successfully';
-            res.redirect(`/profilepage?id=${id}`);
+            res.redirect(`/product_info?id=${id}`);
         });
     }
 };
