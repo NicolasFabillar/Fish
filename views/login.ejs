@@ -34,9 +34,19 @@
       </div>
     </div>
 
+    <div id="successPopup" class="error-popup">
+      <div class="popup-content">
+        <div class="icon">
+          <span class="close" onclick="closeSuccessPopup()">&times;</span>
+        </div>
+        <h1>Success</h1>
+        <p>You are now logged in.</p>
+      </div>
+    </div>
+
     <div class="wrapper">
       <div class="title-text" style="margin-left: 85px">
-        <img src="/images/logo1.png" alt="" style="width: 200px" />
+        <a href="/"><img src="/images/logo1.png" alt="" style="width: 200px" /></a>
       </div>
       <div class="form-container">
         <div class="form-inner">
@@ -124,10 +134,19 @@
 
       // Error Popup
       var errorPopup = document.getElementById("errorPopup");
+      var successPopup = document.getElementById("successPopup");
 
       // Show error popup function
       function showErrorPopup() {
         errorPopup.style.display = "block";
+      }
+
+      function showSuccessPopup() {
+        successPopup.style.display = "block";
+      }
+
+      function closeSuccessPopup() {
+        successPopup.style.display = "none";
       }
 
       // Close error popup function
@@ -140,6 +159,10 @@
             const message = '<%= message %>';
             if (message === 'Wrong Password') {
                 showErrorPopup();
+                event.preventDefault(); // Prevent form submission if necessary
+            }
+            if (message === 'Logged in Successfully') {
+                showSuccessPopup();
                 event.preventDefault(); // Prevent form submission if necessary
             }
             if (message === 'Login First') {

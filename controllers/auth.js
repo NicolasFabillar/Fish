@@ -57,15 +57,14 @@ exports.login = (req, res) => {
             req.session.userID = user.id;
             req.session.profileImage = user.profile_img;
             req.session.isSeller = user.is_Seller;
-            req.session.isLoggedin = true;
 
             if (fishID) {
                 res.redirect(`/product_info?id=${fishID}`);
             } else if (sellerPage) {
                 res.redirect(`/sellers`);
-            } else {
-                res.redirect('/');
-            }
+            } return res.render('login', {
+                message: 'Logged in Successfully'
+            });
         } else {
             return res.render('login', {
                 message: 'Wrong Password'
